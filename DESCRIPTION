@@ -15,8 +15,8 @@ Description: Mine metrics on common places on the web through the power of their
     There is an associated dashboard template and tutorials that are underdevelopment that help you  
     fully utilize 'metricminer'.
 License: GPL-3
-URL: https://github.com/fhdsl/metricminer
-BugReports: https://github.com/fhdsl/metricminer/issues
+URL: https://github.com/ottrproject/metricminer
+BugReports: https://github.com/ottrproject/metricminer/issues
 Imports:
     httr,
     jsonlite,

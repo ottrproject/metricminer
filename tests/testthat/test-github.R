@@ -24,17 +24,17 @@ if (Sys.getenv("METRICMINER_GITHUB_PAT") != "") {
       in_test = FALSE
     )
 
-    metrics <- get_github_repo_summary(repo = "fhdsl/metricminer")
+    metrics <- get_github_repo_summary(repo = "ottrproject/metricminer")
 
     expect_named(metrics, c(
       'num_repo_activities', 'num_stars', 'num_forks', 'num_contributors',
       'total_contributors', 'health_percentage'
     ))
 
-    time_course_metrics <- get_github_repo_timecourse(repo = "fhdsl/metricminer")
+    time_course_metrics <- get_github_repo_timecourse(repo = "ottrproject/metricminer")
     expect_named(time_course_metrics, c("repo", "timestamp", "count_clones", "uniques_clones", "count_views", "uniques_views"))
 
-    repo_names <- c("fhdsl/metricminer", "jhudsl/OTTR_Template")
+    repo_names <- c("ottrproject/metricminer", "ottrproject/OTTR_Template")
     some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names)
 
     expect_named(some_repos_metrics, c(

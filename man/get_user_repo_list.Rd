@@ -13,7 +13,7 @@ get_user_repo_list(
 }
 \arguments{
 \item{owner}{The owner of the repository.
-So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl`}
+So for `https://github.com/ottrproject/metricminer`, it would be `fhdsl`}
 
 \item{count}{The number of responses that should be returned.
 Default is 100000}
