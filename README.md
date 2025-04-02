@@ -1,3 +1,8 @@
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ottrproject/metricminer/workflows/R-CMD-check/badge.svg)](https://github.com/ottrproject/metricminer/actions) [![CRAN status](https://www.r-pkg.org/badges/version/metricminer)](https://CRAN.R-project.org/package=metricminer) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/metricminer)](https://cran.r-project.org/package=metricminer) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) <!-- [![GitHub release (latest by --> <!-- date)](https://img.shields.io/github/v/release/ottrproject/metricminer?style=social)](https://github.com/ottrproject/metricminer/releases/tag/v1.0.0) --> <!-- [![Codecov test --> <!-- coverage](https://codecov.io/gh/jhudsl/ottrpal/branch/main/graph/badge.svg)](https://codecov.io/gh/jhudsl/ottrpal?branch=main) -->
+
+<!-- badges: end -->
 
 # metricminer <img src="https://raw.githubusercontent.com/fhdsl/metricminer/main/resources/metricminer-gnome.png" width = "100">
 
