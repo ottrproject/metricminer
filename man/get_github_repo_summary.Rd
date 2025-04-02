@@ -14,8 +14,8 @@ get_github_repo_summary(
 }
 \arguments{
 \item{repo}{The repository name.
-So for `https://github.com/fhdsl/metricminer`,
-it would be `fhdsl/metricminer`}
+So for `https://github.com/ottrproject/metricminer`,
+it would be `ottrproject/metricminer`}
 
 \item{token}{You can provide the Personal Access Token key directly or this
 function will attempt to grab a PAT that was stored using the
@@ -51,6 +51,6 @@ This is a function to get the information about a repository
 
 authorize("github")
 
-summary_metrics <- get_github_repo_summary(repo = "fhdsl/metricminer")
+summary_metrics <- get_github_repo_summary(repo = "ottrproject/metricminer")
 }
 }

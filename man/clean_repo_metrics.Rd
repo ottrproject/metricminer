@@ -8,7 +8,7 @@ clean_repo_metrics(repo_name, repo_metric_list)
 }
 \arguments{
 \item{repo_name}{The repository name.
-So for `https://github.com/fhdsl/metricminer`, it would be `metricminer`}
+So for `https://github.com/ottrproject/metricminer`, it would be `metricminer`}
 
 \item{repo_metric_list}{a list containing the metrics}
 }

@@ -1,19 +1,19 @@
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ottrproject/metricminer/workflows/R-CMD-check/badge.svg)](https://github.com/ottrproject/metricminer/actions) [![CRAN status](https://www.r-pkg.org/badges/version/metricminer)](https://CRAN.R-project.org/package=metricminer) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/metricminer)](https://cran.r-project.org/package=metricminer) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) <!-- [![GitHub release (latest by --> <!-- date)](https://img.shields.io/github/v/release/ottrproject/metricminer?style=social)](https://github.com/ottrproject/metricminer/releases/tag/v1.0.0) --> <!-- [![Codecov test --> <!-- coverage](https://codecov.io/gh/jhudsl/ottrpal/branch/main/graph/badge.svg)](https://codecov.io/gh/jhudsl/ottrpal?branch=main) -->
+[![R-CMD-check](https://github.com/ottrproject/metricminer/workflows/R-CMD-check/badge.svg)](https://github.com/ottrproject/metricminer/actions) [![CRAN status](https://www.r-pkg.org/badges/version/metricminer)](https://CRAN.R-project.org/package=metricminer) [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/metricminer)](https://cran.r-project.org/package=metricminer) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) <!-- [![GitHub release (latest by --> <!-- date)](https://img.shields.io/github/v/release/ottrproject/metricminer?style=social)](https://github.com/ottrproject/metricminer/releases/tag/v1.0.0) --> <!-- [![Codecov test --> <!-- coverage](https://codecov.io/gh/ottrproject/ottrpal/branch/main/graph/badge.svg)](https://codecov.io/gh/ottrproject/ottrpal?branch=main) -->
 
 <!-- badges: end -->
 
-# metricminer <img src="https://raw.githubusercontent.com/fhdsl/metricminer/main/resources/metricminer-gnome.png" width = "100">
+# metricminer <img src="https://raw.githubusercontent.com/ottrproject/metricminer/main/resources/metricminer-gnome.png" width = "100">
 
 Digging up data that matters, making it dashboard-ready.
 
 `metricminer` is an R package that helps you mine metrics from common places on the web through the power of their APIs.
 
 It also helps format the data so that it can easily be used for a dashboard or other purposes.
-It will have an associated [dashboard template](https://github.com/fhdsl/metricminer-dashboard) and tutorials to help you fully utilize the data you retrieve with `metricminer`  (but these are still under development!)
+It will have an associated [dashboard template](https://github.com/ottrproject/metricminer-dashboard) and tutorials to help you fully utilize the data you retrieve with `metricminer`  (but these are still under development!)
 
-- You can [read the metricminer package documentation here](https://hutchdatascience.org/metricminer/).
+- You can [read the metricminer package documentation here](https://ottrproject.org/metricminer/).
 - Additionally, you can read more about metric collection in our [associated manuscript, which is currently a preprint](https://arxiv.org/abs/2306.03255).
 
 ## Apps Supported
@@ -68,7 +68,7 @@ If you want the development version (not advised) you can install using the `rem
 if (!("remotes" %in% installed.packages())) {
   install.packages("remotes")
 }
-remotes::install_github("fhdsl/metricminer")
+remotes::install_github("ottrproject/metricminer")
 ```
 
 Attach the library or decide to use the `metricminer::` notation.
@@ -97,7 +97,7 @@ delete_creds()
 You can retrieve metrics from a repository on GitHub by running:
 ```
 authorize("github")
-metrics <- get_github_metrics(repo = "fhdsl/metricminer")
+metrics <- get_github_metrics(repo = "ottrproject/metricminer")
 ```
 
 ### Calendly
@@ -193,7 +193,7 @@ authorize("github")
 
 If you want to do this by giving a list of specific repositories you want data from you can just provide a vector of those repository's names like this:
 ```
-repo_names <- c("fhdsl/metricminer", "jhudsl/OTTR_Template")
+repo_names <- c("ottrproject/metricminer", "ottrproject/OTTR_Template")
 some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names)
 ```
 

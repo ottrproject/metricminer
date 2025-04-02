@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 It also helps make the data in a format that is easily used for a dashboard or other purposes.
 It will have an associated dashboard template and tutorials to help you fully use the data you retrieve with `metricminer`  (but these are still under development!)
 
-You can [read the metricminer package documentation here](https://hutchdatascience.org/metricminer/).
+You can [read the metricminer package documentation here](https://ottrproject.org/metricminer/).
 
 ## Apps supported
 
@@ -55,7 +55,7 @@ If you want the development version (not advised) you can install using the `rem
 if (!("remotes" %in% installed.packages())) {
   install.packages("remotes")
 }
-remotes::install_github("fhdsl/metricminer")
+remotes::install_github("ottrproject/metricminer")
 ```
 
 ```
@@ -82,12 +82,12 @@ delete_creds()
 You can retrieve metrics from a repository on GitHub doing this:
 ```
 authorize("github")
-metrics <- get_github_repo_summary(repo = "fhdsl/metricminer")
+metrics <- get_github_repo_summary(repo = "ottrproject/metricminer")
 ```
 
 ```
 authorize("github")
-metrics <- get_github_repo_timecourse(repo = "fhdsl/metricminer")
+metrics <- get_github_repo_timecourse(repo = "ottrproject/metricminer")
 ```
 
 ### Calendly
@@ -185,7 +185,7 @@ all_repos_metrics <- get_multiple_repos_metrics(owner = "fhdsl")
 
 If you want to do this by giving a list of specific repositories you want data from you can just provide a vector of those repository's names like this:
 ```
-repo_names <- c("fhdsl/metricminer", "jhudsl/OTTR_Template")
+repo_names <- c("ottrproject/metricminer", "ottrproject/OTTR_Template")
 some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names)
 ```
 

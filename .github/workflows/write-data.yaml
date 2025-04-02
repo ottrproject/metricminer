@@ -32,19 +32,19 @@ jobs:
           )
           gsheet <- "https://docs.google.com/spreadsheets/d/1lk3vMgE4CNuACrI1mzHrv6AsvXbdhw1zJENMkIEhrZs/edit#gid=0"
           repos <- c(
-              "fhdsl/metricminer",
-              "fhdsl/metricminer.org",
-              "jhudsl/ottrpal",
+              "ottrproject/metricminer",
+              "ottrproject/metricminer.org",
+              "ottrproject/ottrpal",
               "jhudsl/ari",
               "jhudsl/cow",
-              "jhudsl/ottrproject.org",
+              "ottrproject/ottrproject.org",
               "jhudsl/ottr_docker",
-              "jhudsl/ottr-reports",
+              "ottrproject/ottr-reports",
               "fhdsl/conrad",
               "jhudsl/text2speech",
               "jhudsl/OTTR_Quizzes",
-              "jhudsl/OTTR_Template",
-              "jhudsl/OTTR_Template_Website",
+              "ottrproject/OTTR_Template",
+              "ottrproject/OTTR_Template_Website",
               "jhudsl/ITN_computing_resources",
               "jhudsl/ITN_Platforms",
               "fhdsl/Choosing_Genomics_Tools",
@@ -61,8 +61,8 @@ jobs:
               "fhdsl/NIH_Data_Sharing", 
               "fhdsl/containers_for_scientists",
               "fhdsl/Proactive_Data_Management_and_Sharing",
-              "fhdsl/OTTR_Quarto", 
-              "fhdsl/OTTR_Quarto_Website"
+              "ottrproject/OTTR_Quarto", 
+              "ottrproject/OTTR_Quarto_Website"
           )
           repo_metrics <- metricminer::get_multiple_repos_metrics(repo_names = repos, time_course = TRUE)
 
