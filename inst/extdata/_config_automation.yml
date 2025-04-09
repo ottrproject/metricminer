@@ -24,7 +24,7 @@ cran_googlesheet:
 
 ###### GitHub ######
 refresh-github: yes
-github_repos: [ fhdsl/metricminer, fhdsl/metricminer.org ]
+github_repos: [ ottrproject/metricminer, ottrproject/metricminer.org ]
 github_googlesheet:
 
 ###### Google Analytics ######

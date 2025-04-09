@@ -15,7 +15,7 @@ get_github_metrics(
 }
 \arguments{
 \item{repo}{The repository name.
-So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl/metricminer`}
+So for `https://github.com/ottrproject/metricminer`, it would be `ottrproject/metricminer`}
 
 \item{token}{You can provide the Personal Access Token key directly or this
 function will attempt to grab a PAT that was stored using the
@@ -51,15 +51,15 @@ This is a function to get the information about a repository
 \dontrun{
 
 authorize("github")
-metrics <- get_github_metrics(repo = "fhdsl/metricminer")
+metrics <- get_github_metrics(repo = "ottrproject/metricminer")
 
 # If you only want some of the stats you can choose which ones with the
 # github_stats argument
 metrics <- get_github_metrics(
-  repo = "fhdsl/metricminer",
+  repo = "ottrproject/metricminer",
   github_stats = c("repo_activity", "stars"))
 
-summary_metrics <- get_github_repo_summary(repo = "fhdsl/metricminer")
-timecourse_metrics <- get_github_repo_timecourse(repo = "fhdsl/metricminer")
+summary_metrics <- get_github_repo_summary(repo = "ottrproject/metricminer")
+timecourse_metrics <- get_github_repo_timecourse(repo = "ottrproject/metricminer")
 }
 }
