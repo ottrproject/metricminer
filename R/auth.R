@@ -50,7 +50,8 @@ authorize <- function(app_name = NULL,
       collapse = ", ")))
     message("Do you want to overwrite these with new credentials?")
     use_old <- menu(c("Yes, overwrite the credentials",
-    "No, I'll use these credentials and stop this function."))
+    "No, I'll use these credentials and stop this function.")) 
+    if (use_old == 1) delete_creds(app_name)
     if (use_old == 2) stop("Using old credentials")
   }
 
