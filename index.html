@@ -52,7 +52,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/fhdsl/metricminer/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ottrproject/metricminer/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -63,13 +63,13 @@
   <main id="main" class="col-md-9">
 <!-- badges: end -->
 <div class="section level1">
-<div class="page-header"><h1 id="metricminer-">metricminer <img src="https://raw.githubusercontent.com/fhdsl/metricminer/main/resources/metricminer-gnome.png" width="100"><a class="anchor" aria-label="anchor" href="#metricminer-"></a>
+<div class="page-header"><h1 id="metricminer-">metricminer <img src="https://raw.githubusercontent.com/ottrproject/metricminer/main/resources/metricminer-gnome.png" width="100"><a class="anchor" aria-label="anchor" href="#metricminer-"></a>
 </h1></div>
 <p>Digging up data that matters, making it dashboard-ready.</p>
 <p><code>metricminer</code> is an R package that helps you mine metrics from common places on the web through the power of their APIs.</p>
-<p>It also helps format the data so that it can easily be used for a dashboard or other purposes. It will have an associated <a href="https://github.com/fhdsl/metricminer-dashboard" class="external-link">dashboard template</a> and tutorials to help you fully utilize the data you retrieve with <code>metricminer</code> (but these are still under development!)</p>
+<p>It also helps format the data so that it can easily be used for a dashboard or other purposes. It will have an associated <a href="https://github.com/ottrproject/metricminer-dashboard" class="external-link">dashboard template</a> and tutorials to help you fully utilize the data you retrieve with <code>metricminer</code> (but these are still under development!)</p>
 <ul>
-<li>You can <a href="https://hutchdatascience.org/metricminer/" class="external-link">read the metricminer package documentation here</a>.</li>
+<li>You can <a href="https://ottrproject.org/metricminer/" class="external-link">read the metricminer package documentation here</a>.</li>
 <li>Additionally, you can read more about metric collection in our <a href="https://arxiv.org/abs/2306.03255" class="external-link">associated manuscript, which is currently a preprint</a>.</li>
 </ul>
 <div class="section level2">
@@ -136,7 +136,7 @@
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="st">"remotes"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html" class="external-link">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"fhdsl/metricminer"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ottrproject/metricminer"</span><span class="op">)</span></span></code></pre></div>
 <p>Attach the library or decide to use the <code>metricminer::</code> notation. <code>{r setup} library(metricminer)</code></p>
 </div>
 <div class="section level2">
@@ -153,7 +153,7 @@
 </h3>
 <p>You can retrieve metrics from a repository on GitHub by running:</p>
 <pre><code><span><span class="fu"><a href="reference/authorize.html">authorize</a></span><span class="op">(</span><span class="st">"github"</span><span class="op">)</span></span>
-<span><span class="va">metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_github_metrics.html">get_github_metrics</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"fhdsl/metricminer"</span><span class="op">)</span></span></code></pre>
+<span><span class="va">metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_github_metrics.html">get_github_metrics</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"ottrproject/metricminer"</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="calendly">Calendly<a class="anchor" aria-label="anchor" href="#calendly"></a>
@@ -218,7 +218,7 @@
 <p>From GitHub you can attempt to collect repository metrics from all repositories from an account.</p>
 <pre><code><span><span class="fu"><a href="reference/authorize.html">authorize</a></span><span class="op">(</span><span class="st">"github"</span><span class="op">)</span></span></code></pre>
 <p>If you want to do this by giving a list of specific repositories you want data from you can just provide a vector of those repository’s names like this:</p>
-<pre><code><span><span class="va">repo_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fhdsl/metricminer"</span>, <span class="st">"jhudsl/OTTR_Template"</span><span class="op">)</span></span>
+<pre><code><span><span class="va">repo_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ottrproject/metricminer"</span>, <span class="st">"ottrproject/OTTR_Template"</span><span class="op">)</span></span>
 <span><span class="va">some_repos_metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_multiple_repos_metrics.html">get_multiple_repos_metrics</a></span><span class="op">(</span>repo_names <span class="op">=</span> <span class="va">repo_names</span><span class="op">)</span></span></code></pre>
 <p>If you want the time course related data, you can set <code>time_course = TRUE</code>.</p>
 <pre><code><span><span class="va">some_repos_metrics</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_multiple_repos_metrics.html">get_multiple_repos_metrics</a></span><span class="op">(</span>repo_names <span class="op">=</span> <span class="va">repo_names</span>, time_course <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
@@ -256,8 +256,8 @@
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=metricminer" class="external-link">View on CRAN</a></li>
-<li><a href="https://github.com/fhdsl/metricminer/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/fhdsl/metricminer/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/ottrproject/metricminer/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ottrproject/metricminer/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
