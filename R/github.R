@@ -64,7 +64,7 @@ get_github_user <- function(token = NULL) {
 #' function will attempt to grab a PAT that was stored using the
 #' `authorize("github")` function
 #' @param owner The owner of the repository.
-#' So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl`
+#' So for `https://github.com/ottrproject/metricminer`, it would be `fhdsl`
 #' @param count The number of responses that should be returned.
 #' Default is 100000
 #' @param data_format Default is to return a curated data frame. However
@@ -117,7 +117,7 @@ get_org_repo_list <- function(owner,
 #' this function will attempt to grab a PAT that was stored using the
 #' `authorize("github")` function
 #' @param owner The owner of the repository.
-#' So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl`
+#' So for `https://github.com/ottrproject/metricminer`, it would be `fhdsl`
 #' @param count The number of responses that should be returned.
 #' Default is 100000
 #' @param data_format Default is to return a curated data frame. However
@@ -170,7 +170,7 @@ get_user_repo_list <- function(owner,
 #' function will attempt to grab a PAT that was stored using the
 #' `authorize("github")` function
 #' @param repo The repository name.
-#' So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl/metricminer`
+#' So for `https://github.com/ottrproject/metricminer`, it would be `ottrproject/metricminer`
 #' @param count How many items would you like to receive? default is 100000
 #' @param github_stats Which stats would you like to collect from the GitHub
 #' API?
@@ -195,16 +195,16 @@ get_user_repo_list <- function(owner,
 #' @examples \dontrun{
 #'
 #' authorize("github")
-#' metrics <- get_github_metrics(repo = "fhdsl/metricminer")
+#' metrics <- get_github_metrics(repo = "ottrproject/metricminer")
 #'
 #' # If you only want some of the stats you can choose which ones with the
 #' # github_stats argument
 #' metrics <- get_github_metrics(
-#'   repo = "fhdsl/metricminer",
+#'   repo = "ottrproject/metricminer",
 #'   github_stats = c("repo_activity", "stars"))
 #'
-#' summary_metrics <- get_github_repo_summary(repo = "fhdsl/metricminer")
-#' timecourse_metrics <- get_github_repo_timecourse(repo = "fhdsl/metricminer")
+#' summary_metrics <- get_github_repo_summary(repo = "ottrproject/metricminer")
+#' timecourse_metrics <- get_github_repo_timecourse(repo = "ottrproject/metricminer")
 #' }
 get_github_metrics <- function(repo,
                                token = NULL,
@@ -324,8 +324,8 @@ get_github_metrics <- function(repo,
 #' function will attempt to grab a PAT that was stored using the
 #' `authorize("github")` function
 #' @param repo The repository name.
-#'  So for `https://github.com/fhdsl/metricminer`,
-#'  it would be `fhdsl/metricminer`
+#'  So for `https://github.com/ottrproject/metricminer`,
+#'  it would be `ottrproject/metricminer`
 #' @param count How many items would you like to receive? default is 100000
 #' @param data_format Default is to return a curated data frame. However if
 #' you'd like to see the raw information returned from GitHub set format to
@@ -345,7 +345,7 @@ get_github_metrics <- function(repo,
 #'
 #' authorize("github")
 #'
-#' timecourse_metrics <- get_github_repo_timecourse(repo = "fhdsl/metricminer")
+#' timecourse_metrics <- get_github_repo_timecourse(repo = "ottrproject/metricminer")
 #' }
 get_github_repo_timecourse <- function(repo,
                                        token = NULL,
@@ -371,8 +371,8 @@ get_github_repo_timecourse <- function(repo,
 #' function will attempt to grab a PAT that was stored using the
 #' `authorize("github")` function
 #' @param repo The repository name.
-#' So for `https://github.com/fhdsl/metricminer`,
-#' it would be `fhdsl/metricminer`
+#' So for `https://github.com/ottrproject/metricminer`,
+#' it would be `ottrproject/metricminer`
 #' @param count How many items would you like to receive? default is 100000
 #' @param data_format Default is to return a curated data frame. However if
 #' you'd like to see the raw information returned from GitHub set format to
@@ -392,7 +392,7 @@ get_github_repo_timecourse <- function(repo,
 #'
 #' authorize("github")
 #'
-#' summary_metrics <- get_github_repo_summary(repo = "fhdsl/metricminer")
+#' summary_metrics <- get_github_repo_summary(repo = "ottrproject/metricminer")
 #' }
 get_github_repo_summary <- function(repo,
                                     token = NULL,
@@ -444,7 +444,7 @@ get_github_repo_summary <- function(repo,
 #'
 #' authorize("github")
 #'
-#' repo_names <- c("fhdsl/metricminer", "jhudsl/OTTR_Template")
+#' repo_names <- c("ottrproject/metricminer", "ottrproject/OTTR_Template")
 #' some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names)
 #'
 #' stars_and_forks <- get_multiple_repos_metrics(repo_names = repo_names,
@@ -499,9 +499,9 @@ get_multiple_repos_metrics <- function(repo_names = NULL,
 #' function will attempt to grab a PAT that was stored using the
 #' `authorize("github")` function
 #' @param owner The repository name.
-#'  So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl`
+#'  So for `https://github.com/ottrproject/metricminer`, it would be `fhdsl`
 #' @param repo The repository name.
-#' So for `https://github.com/fhdsl/metricminer`, it would be `metricminer`
+#' So for `https://github.com/ottrproject/metricminer`, it would be `metricminer`
 #' @param count How many items would you like to receive? default is 100000
 #' @return Metrics for a repository on GitHub
 #' @importFrom gh gh
@@ -542,7 +542,7 @@ gh_repo_wrapper <- function(api_call,
 #' @description This is a function to get metrics for all the repositories
 #' underneath an organization
 #' @param repo_name The repository name.
-#' So for `https://github.com/fhdsl/metricminer`, it would be `metricminer`
+#' So for `https://github.com/ottrproject/metricminer`, it would be `metricminer`
 #' @param repo_metric_list a list containing the metrics
 #' @return Metrics for a repository on GitHub
 #' @importFrom gh gh
