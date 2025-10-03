@@ -59,6 +59,9 @@ github_stats = c("stars", "forks"))
 
 some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names,
  time_course = TRUE)
+
+gh_timecourse <- get_multiple_repos_metrics(repo_names = repo_names,
+ github_stats = c("repo_activity", "stars", "forks", "contributors"))
 }
 
 }

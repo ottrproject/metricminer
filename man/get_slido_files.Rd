@@ -5,18 +5,21 @@
 \title{Get Slido Files}
 \usage{
 get_slido_files(
-  drive_id,
+  shared_drive_id,
+  tags_to_find = "^Polls-per|^JoinedParticipants-",
+  file_type = "spreadsheet",
   token = NULL,
-  recursive = TRUE,
   keep_duplicates = FALSE
 )
 }
 \arguments{
-\item{drive_id}{a URL or drive id that has the slido response output files you are looking to get (will recursively search for files by default).}
+\item{shared_drive_id}{a name, URL, or drive id that has the slido response output files you are looking to get (will recursively search for files by default).}
+
+\item{tags_to_find}{pattern or character that's a regular expression to look for in file names. Default is "^Polls-per|^JoinedParticipants-" which will search for files starting with either of those patterns.}
+
+\item{file_type}{which file type to search for. Default is "spreadsheet"}
 
 \item{token}{credentials for access to Google using OAuth. `authorize("google")`}
-
-\item{recursive}{Should slido files be looked for recursively in this folder? default is TRUE.}
 
 \item{keep_duplicates}{By default we won't keep duplicated files if a two files have the same name. But if you set this to true, duplicates will be returned.}
 }
