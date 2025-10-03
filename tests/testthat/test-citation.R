@@ -1,5 +1,7 @@
 test_that("citations pulled", {
 
+  testthat::skip_on_cran()
+  
   auth_from_secret("google",
       refresh_token = Sys.getenv("METRICMINER_GOOGLE_REFRESH"),
       access_token = Sys.getenv("METRICMINER_GOOGLE_ACCESS"),
