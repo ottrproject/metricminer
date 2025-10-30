@@ -9,11 +9,10 @@
 #' @param shared_drive_id a name, URL, or drive id that has the slido response output files you are looking to get (will recursively search for files by default).
 #' @param tags_to_find pattern or character that's a regular expression to look for in file names. Default is "^Polls-per|^JoinedParticipants-" which will search for files starting with either of those patterns.
 #' @param file_type which file type to search for. Default is "spreadsheet"
-#' @param token credentials for access to Google using OAuth. `authorize("google")`
 #' @param keep_duplicates By default we won't keep duplicated files if a two files have the same name. But if you set this to true, duplicates will be returned.
 #' @return A list of the slido files and their content in a Googledrive location.
 #' @import dplyr
-#' @importFrom googledrive as_id drive_find
+#' @importFrom googledrive as_id drive_find drive_auth
 #' @importFrom googlesheets4 read_sheet
 #' @export
 #'
@@ -23,11 +22,9 @@
 #' drive_id <- "https://drive.google.com/drive/u/0/folders/1XWXHHyj32Uw_UyaUJrqp6S--hHnM0-7l"
 #' slido_data <- get_slido_files(drive_id)
 #' }
-get_slido_files <- function(shared_drive_id, tags_to_find = "^Polls-per|^JoinedParticipants-", file_type = "spreadsheet", token = NULL, keep_duplicates = FALSE) {
-  if (is.null(token)) {
-    # Get auth token
-    token <- get_token(app_name = "google")
-  }
+get_slido_files <- function(shared_drive_id, tags_to_find = "^Polls-per|^JoinedParticipants-", file_type = "spreadsheet", keep_duplicates = FALSE) {
+
+  googledrive::drive_auth() #I think googledrive will handle the rest. If you really want to be sure about it you can pass the token drive_auth()  gives you to the drive_find() function itself.
 
   spreadsheet_list <- drive_find(tags_to_find, type=file_type, shared_drive = shared_drive_id)
 
