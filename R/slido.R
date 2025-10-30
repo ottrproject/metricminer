@@ -28,7 +28,7 @@ get_slido_files <- function(shared_drive_name, tags_to_find = "^Polls-per|^Joine
 
   spreadsheet_list <- drive_find(tags_to_find, type=file_type, shared_drive = shared_drive_name)
 
-  if (length(spreadsheet_list) == 0) {
+  if (nrow(spreadsheet_list) == 0) {
     stop("No slido associated spreadsheets found in the shared drive for the name provided")
   }
 
