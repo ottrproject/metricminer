@@ -34,7 +34,7 @@ gh_repo_timecourse_metrics <- get_github_repo_timecourse(repo = "metricminer/my-
 save_example_data(gh_repo_timecourse_metrics)
 class(gh_repo_timecourse_metrics)
 
-repo_names <- c("fhdsl/metricminer", "jhudsl/OTTR_Template")
+repo_names <- c("ottrproject/metricminer", "ottrproject/OTTR_Template")
 gh_repos_metrics <- get_repos_metrics(repo_names = repo_names)
 save_example_data(gh_repos_metrics)
 

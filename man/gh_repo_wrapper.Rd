@@ -10,10 +10,10 @@ gh_repo_wrapper(api_call, owner, repo, token = NULL, count = 1e+05)
 \item{api_call}{an API call and endpoint. That has `owner` and `user`.}
 
 \item{owner}{The repository name.
-So for `https://github.com/fhdsl/metricminer`, it would be `fhdsl`}
+So for `https://github.com/ottrproject/metricminer`, it would be `fhdsl`}
 
 \item{repo}{The repository name.
-So for `https://github.com/fhdsl/metricminer`, it would be `metricminer`}
+So for `https://github.com/ottrproject/metricminer`, it would be `metricminer`}
 
 \item{token}{You can provide the Personal Access Token key directly or this
 function will attempt to grab a PAT that was stored using the
