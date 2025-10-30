@@ -4,9 +4,10 @@
 #' Get Slido Files
 #' @description This is a function to get slido response output files.
 #' The slido files must be saved as googlesheets and cannot be xlsx.
-#' The scope it uses is the `See, edit, create, and delete all your Google Sheets spreadsheets.`
-#' If you don't check this box on the OAuth screen this function won't work.
-#' @param shared_drive_id a name, URL, or drive id that has the slido response output files you are looking to get (will recursively search for files by default).
+#' The scope it uses is to `view and manage your Drive files' the `See, edit, create, and delete all your Google Sheets spreadsheets.`
+#' However, the user will need to authorize their google account twice (once for googledrive and once for googlesheets)
+#' If you don't check these boxes on the OAuth screens, this function won't work.
+#' @param shared_drive_name a name of a shared drive (not a URL or subpart of a URL) (will recursively search for files by default).
 #' @param tags_to_find pattern or character that's a regular expression to look for in file names. Default is "^Polls-per|^JoinedParticipants-" which will search for files starting with either of those patterns.
 #' @param file_type which file type to search for. Default is "spreadsheet"
 #' @param keep_duplicates By default we won't keep duplicated files if a two files have the same name. But if you set this to true, duplicates will be returned.
@@ -18,18 +19,17 @@
 #'
 #' @examples \dontrun{
 #'
-#' drive_id <- "https://drive.google.com/drive/folders/0AJb5Zemj0AAkUk9PVA"
-#' drive_id <- "https://drive.google.com/drive/u/0/folders/1XWXHHyj32Uw_UyaUJrqp6S--hHnM0-7l"
-#' slido_data <- get_slido_files(drive_id)
+#' shared_drive_name <- "ITCR"
+#' slido_data <- get_slido_files(shared_drive_name)
 #' }
-get_slido_files <- function(shared_drive_id, tags_to_find = "^Polls-per|^JoinedParticipants-", file_type = "spreadsheet", keep_duplicates = FALSE) {
+get_slido_files <- function(shared_drive_name, tags_to_find = "^Polls-per|^JoinedParticipants-", file_type = "spreadsheet", keep_duplicates = FALSE) {
 
-  googledrive::drive_auth() #I think googledrive will handle the rest. If you really want to be sure about it you can pass the token drive_auth()  gives you to the drive_find() function itself.
+  googledrive::drive_auth()
 
-  spreadsheet_list <- drive_find(tags_to_find, type=file_type, shared_drive = shared_drive_id)
+  spreadsheet_list <- drive_find(tags_to_find, type=file_type, shared_drive = shared_drive_name)
 
   if (length(spreadsheet_list) == 0) {
-    stop("No slido associated spreadsheets found in this drive Id provided")
+    stop("No slido associated spreadsheets found in the shared drive for the name provided")
   }
 
   file_info <- data.frame(
