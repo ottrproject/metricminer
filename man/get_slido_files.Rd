@@ -5,18 +5,18 @@
 \title{Get Slido Files}
 \usage{
 get_slido_files(
-  drive_id,
-  token = NULL,
-  recursive = TRUE,
+  shared_drive_name,
+  tags_to_find = "^Polls-per|^JoinedParticipants-",
+  file_type = "spreadsheet",
   keep_duplicates = FALSE
 )
 }
 \arguments{
-\item{drive_id}{a URL or drive id that has the slido response output files you are looking to get (will recursively search for files by default).}
+\item{shared_drive_name}{a name of a shared drive (not a URL or subpart of a URL) (will recursively search for files by default).}
 
-\item{token}{credentials for access to Google using OAuth. `authorize("google")`}
+\item{tags_to_find}{pattern or character that's a regular expression to look for in file names. Default is "^Polls-per|^JoinedParticipants-" which will search for files starting with either of those patterns.}
 
-\item{recursive}{Should slido files be looked for recursively in this folder? default is TRUE.}
+\item{file_type}{which file type to search for. Default is "spreadsheet"}
 
 \item{keep_duplicates}{By default we won't keep duplicated files if a two files have the same name. But if you set this to true, duplicates will be returned.}
 }
@@ -26,14 +26,14 @@ A list of the slido files and their content in a Googledrive location.
 \description{
 This is a function to get slido response output files.
 The slido files must be saved as googlesheets and cannot be xlsx.
-The scope it uses is the `See, edit, create, and delete all your Google Sheets spreadsheets.`
-If you don't check this box on the OAuth screen this function won't work.
+The scope it uses is to `view and manage your Drive files' the `See, edit, create, and delete all your Google Sheets spreadsheets.`
+However, the user will need to authorize their google account twice (once for googledrive and once for googlesheets)
+If you don't check these boxes on the OAuth screens, this function won't work.
 }
 \examples{
 \dontrun{
 
-drive_id <- "https://drive.google.com/drive/folders/0AJb5Zemj0AAkUk9PVA"
-drive_id <- "https://drive.google.com/drive/u/0/folders/1XWXHHyj32Uw_UyaUJrqp6S--hHnM0-7l"
-slido_data <- get_slido_files(drive_id)
+shared_drive_name <- "ITCR"
+slido_data <- get_slido_files(shared_drive_name)
 }
 }
