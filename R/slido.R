@@ -4,7 +4,7 @@
 #' Get Slido Files
 #' @description This is a function to get slido response output files.
 #' The slido files must be saved as googlesheets and cannot be xlsx.
-#' The scope it uses is to `view and manage your Drive files' the `See, edit, create, and delete all your Google Sheets spreadsheets.`
+#' Authentication for this function is handled by the `googledrive` package.
 #' However, the user will need to authorize their google account twice (once for googledrive and once for googlesheets).
 #' If you don't check these boxes on the OAuth screens, this function won't work.
 #' @param shared_drive_name a name of a shared drive (not a URL or subpart of a URL) (will recursively search for files by default).
