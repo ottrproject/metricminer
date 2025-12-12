@@ -51,7 +51,7 @@ repositories.
 
 authorize("github")
 
-repo_names <- c("fhdsl/metricminer", "jhudsl/OTTR_Template")
+repo_names <- c("ottrproject/metricminer", "ottrproject/OTTR_Template")
 some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names)
 
 stars_and_forks <- get_multiple_repos_metrics(repo_names = repo_names,
@@ -59,6 +59,9 @@ github_stats = c("stars", "forks"))
 
 some_repos_metrics <- get_multiple_repos_metrics(repo_names = repo_names,
  time_course = TRUE)
+
+gh_timecourse <- get_multiple_repos_metrics(repo_names = repo_names,
+ github_stats = c("repo_activity", "stars", "forks", "contributors"))
 }
 
 }

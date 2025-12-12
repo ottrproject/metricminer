@@ -42,6 +42,20 @@ get_citation_count <- function(paper_cite_link) {
     rvest::html_nodes("a") %>%
     rvest::html_attr("href")
 
+  # Handle case where no citations found
+  if (length(cite_titles) == 0) {
+    return(data.frame(
+      original_paper = character(0),
+      cite_titles = character(0),
+      links = character(0)
+    ))
+  }
+
+  # Handle case where original_paper extraction fails
+  if (length(original_paper) == 0) {
+    original_paper <- rep(NA_character_, length(cite_titles))
+  }
+
   df <- data.frame(original_paper, cite_titles, links)
   return(df)
 }

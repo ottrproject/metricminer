@@ -1,5 +1,8 @@
 # Extracting data from Google Analytics
 
+# Declare global variables to avoid R CMD check NOTEs
+utils::globalVariables(c("dimensionValues", "metricValues", "page", "website"))
+
 #' Handler for API requests from Google Analytics
 #' @description This is a function that handles requests from Google Analytics.
 #'  The scope it uses is the `See and download your Google Analytics data` If you don't this check this box on the OAuth screen this won't work.
@@ -423,11 +426,12 @@ get_multiple_ga_metrics <- function(account_id = NULL,
       return(metrics)
     })
     names(per_type) <- display_names
-
+    
     if (a_stats_type == "metrics") per_type <- clean_ga_metrics(per_type, type = "metrics")
     if (a_stats_type == "dimensions") per_type <- clean_ga_dimensions(per_type)
     if (a_stats_type == "link_clicks") per_type <- clean_ga_dimensions(per_type)
-
+    if (a_stats_type == "pages") per_type <- clean_ga_metrics(per_type, type = "pages")
+    
     return(per_type)
   })
 
@@ -458,9 +462,9 @@ clean_ga_metrics <- function(metrics = NULL, type = NULL) {
   }
 
   if (type == "pages") {
-    dim_df <- clean_df$dimensionValues %>%
-      dplyr::bind_rows() %>%
-      dplyr::rename(page = value)
+    dim_df <- clean_df %>%
+      dplyr::bind_rows(.id = "website_parent") %>%
+      dplyr::rename(page = dimensionValues)
 
     clean_df <- clean_df[names(clean_df) != "dimensionValues"]
   }
@@ -470,11 +474,14 @@ clean_ga_metrics <- function(metrics = NULL, type = NULL) {
     dplyr::bind_rows(.id = "website") %>%
     tidyr::separate(col = "metricValues", sep = ",", into = stat_names) %>%
     dplyr::mutate_all(~ gsub("list\\(value = c\\(|\\)\\)|\"|", "", .)) %>%
+    dplyr::mutate_all(~ gsub("^list\\(value = |\\)", "", .)) %>%
     dplyr::mutate_at(stat_names, as.numeric)
 
   if (type == "pages") {
     clean_df <- dim_df %>%
-     dplyr::bind_cols(clean_df)
+      dplyr::bind_cols(clean_df) %>%
+      select(!c(page, metricValues, website)) %>%
+      rename(page = dimensionValues)
   }
 
   return(clean_df)
