@@ -13,7 +13,7 @@ Digging up data that matters, making it dashboard-ready.
 It also helps format the data so that it can easily be used for a dashboard or other purposes.
 It will have an associated [dashboard template](https://github.com/ottrproject/metricminer-dashboard) and tutorials to help you fully utilize the data you retrieve with `metricminer`  (but these are still under development!)
 
-- You can [read the metricminer package documentation here](https://ottrproject.org/metricminer/).
+- You can [read the metricminer package documentation here](https://www.ottrproject.org/metricminer/).
 - Additionally, you can read more about metric collection in our [associated manuscript, which is currently a preprint](https://arxiv.org/abs/2306.03255).
 
 ## Apps Supported
@@ -29,7 +29,7 @@ Currently `metricminer` supports mining data from:
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents**
 
 - [metricminer](#metricminer)
   - [Apps supported](#apps-supported)

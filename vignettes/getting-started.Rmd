@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 It also helps make the data in a format that is easily used for a dashboard or other purposes.
 It will have an associated dashboard template and tutorials to help you fully use the data you retrieve with `metricminer`  (but these are still under development!)
 
-You can [read the metricminer package documentation here](https://ottrproject.org/metricminer/).
+You can [read the metricminer package documentation here](https://www.ottrproject.org/metricminer/).
 
 ## Apps supported
 
