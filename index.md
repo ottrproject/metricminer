@@ -12,7 +12,7 @@ tutorials to help you fully utilize the data you retrieve with
 `metricminer` (but these are still under development!)
 
 - You can [read the metricminer package documentation
-  here](https://ottrproject.org/metricminer/).
+  here](https://www.ottrproject.org/metricminer/).
 - Additionally, you can read more about metric collection in our
   [associated manuscript, which is currently a
   preprint](https://arxiv.org/abs/2306.03255).
@@ -29,8 +29,7 @@ Currently `metricminer` supports mining data from:
 - [Slido](https://admin.sli.do/events) export files stored on
   Googledrive
 
-**Table of Contents** *generated with
-[DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents**
 
 - [metricminer](#metricminer)
   - [Apps supported](#apps-supported)

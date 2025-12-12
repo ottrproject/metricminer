@@ -613,8 +613,7 @@ str(gforms_multiple)
 
 ### Slido
 
-[You can read more about Slido data
-here](https://community.slido.com/analytics-and-exports-44).
+[You can read more about Slido here](https://www.slido.com/).
 
 [`get_slido_files()`](../reference/get_slido_files.md) returns this kind
 of data.

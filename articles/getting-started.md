@@ -11,7 +11,7 @@ template and tutorials to help you fully use the data you retrieve with
 `metricminer` (but these are still under development!)
 
 You can [read the metricminer package documentation
-here](https://ottrproject.org/metricminer/).
+here](https://www.ottrproject.org/metricminer/).
 
 ### Apps supported
 
