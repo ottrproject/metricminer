@@ -748,13 +748,13 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] metricminer_1.0.0
+#> [1] metricminer_1.0.1
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] jsonlite_2.0.0      dplyr_1.1.4         compiler_4.5.2     
 #>  [4] tidyselect_1.2.1    stringr_1.6.0       assertthat_0.2.1   
 #>  [7] snakecase_0.11.1    tidyr_1.3.1         jquerylib_0.1.4    
-#> [10] systemfonts_1.3.1   textshaping_1.0.4   yaml_2.3.11        
+#> [10] systemfonts_1.3.1   textshaping_1.0.4   yaml_2.3.12        
 #> [13] fastmap_1.2.0       R6_2.6.1            generics_0.1.4     
 #> [16] curl_7.0.0          knitr_1.50          tibble_3.3.0       
 #> [19] janitor_2.2.1       desc_1.4.3          lubridate_1.9.4    
