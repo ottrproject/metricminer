@@ -32,6 +32,8 @@ Currently `metricminer` supports mining data from:
 - [Google Analytics](https://developers.google.com/analytics)
 - [Google Forms](https://www.google.com/forms/about/)
 - [Slido](https://admin.sli.do/events) export files stored on Googledrive
+- [Youtube Videos](https://www.youtube.com/)
+- [Google Scholar Citations](https://scholar.google.com/)
 
 ## Data format options
 
@@ -168,6 +170,24 @@ authorize("google")
 youtube_video_stats <- get_youtube_video_stats("oMVVeZjHJ48")
 youtube_playlist_stats <- get_youtube_playlist_stats("PL9bqxQvtZgAMblZJhg7e0_ThDD-pN4UqA")
 ```
+
+### Google Scholar Citations
+
+If you have publications that Google Scholar has indexed, you can retrieve stats on how many other articles have cited those publications as well as some information on the citing articles.
+
+```
+paper_cite_link <- "https://scholar.google.com/scholar?cites=6140457238337460780"
+papers_cited_df <- get_citation_count(paper_cite_link)
+```
+
+You can retrieve the `paper_cite_link` used in the code example above by following these steps:
+
+1. Go to: https://scholar.google.com/scholar
+1. Search for the paper you are looking for the citation count.
+1. Then click the Cited by ___ button below the title of the paper
+1. Copy that URL
+
+Currently this retrieval works as expected if you've been cited by 10 or less other articles. We're fixing this bug to include all articles that have cited an article.
 
 ## Bulk Retrievals
 
