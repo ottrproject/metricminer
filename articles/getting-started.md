@@ -23,6 +23,8 @@ Currently `metricminer` supports mining data from:
 - [Google Forms](https://www.google.com/forms/about/)
 - [Slido](https://admin.sli.do/events) export files stored on
   Googledrive
+- [Youtube Videos](https://www.youtube.com/)
+- [Google Scholar Citations](https://scholar.google.com/)
 
 ### Data format options
 
@@ -145,6 +147,12 @@ You can retrieve Google form information and responses like this:
     form_url <- "https://docs.google.com/forms/d/1Z-lMMdUyubUqIvaSXeDu1tlB7_QpNTzOk3kfzjP2Uuo/edit"
     form_info <- get_google_form(form_url)
 
+Note that currently the form questions are not directly provided as
+headers in the output from metricminer. This functionality is a work in
+progress. We encourage the use of
+[surveydown](https://pkg.surveydown.org/) for new surveys. We’re also
+exploring adding compatability between metricminer and surveydown.
+
 #### Slido
 
 If you have used Slido for interactive slide sessions and collected that
@@ -165,6 +173,27 @@ that URL.
     authorize("google")
     youtube_video_stats <- get_youtube_video_stats("oMVVeZjHJ48")
     youtube_playlist_stats <- get_youtube_playlist_stats("PL9bqxQvtZgAMblZJhg7e0_ThDD-pN4UqA")
+
+#### Google Scholar Citations
+
+If you have publications that Google Scholar has indexed, you can
+retrieve stats on how many other articles have cited those publications
+as well as some information on the citing articles.
+
+    paper_cite_link <- "https://scholar.google.com/scholar?cites=6140457238337460780"
+    papers_cited_df <- get_citation_count(paper_cite_link)
+
+You can retrieve the `paper_cite_link` used in the code example above by
+following these steps:
+
+1.  Go to: <https://scholar.google.com/scholar>
+2.  Search for the paper you are looking for the citation count.
+3.  Then click the Cited by \_\_\_ button below the title of the paper
+4.  Copy that URL
+
+Currently this retrieval works as expected if you’ve been cited by 10 or
+less other articles. We’re fixing this bug to include all articles that
+have cited an article.
 
 ### Bulk Retrievals
 
