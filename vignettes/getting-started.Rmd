@@ -147,6 +147,8 @@ form_url <- "https://docs.google.com/forms/d/1Z-lMMdUyubUqIvaSXeDu1tlB7_QpNTzOk3
 form_info <- get_google_form(form_url)
 ```
 
+Note that currently the form questions are not directly provided as headers in the output from metricminer. This functionality is a work in progress. We encourage the use of [surveydown](https://pkg.surveydown.org/) for new surveys. We're also exploring adding compatability between metricminer and surveydown.
+
 ### Slido
 
 If you have used Slido for interactive slide sessions and collected that info and exported it to your googledrive you can use `metricminer` to collect that data as well.
