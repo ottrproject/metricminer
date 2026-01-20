@@ -13,14 +13,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/ottrproject/metricminer/blob/main/DESCRIPTION)
 
-Savonen C, Isaac K, Baek H (2025). *metricminer: Mine Metrics from
+Savonen C, Isaac K, Baek H (2026). *metricminer: Mine Metrics from
 Common Places on the Web*. R package version 1.0.1,
 <https://github.com/ottrproject/metricminer>.
 
     @Manual{,
       title = {metricminer: Mine Metrics from Common Places on the Web},
       author = {Candace Savonen and Kate Isaac and Howard Baek},
-      year = {2025},
+      year = {2026},
       note = {R package version 1.0.1},
       url = {https://github.com/ottrproject/metricminer},
     }
