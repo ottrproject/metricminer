@@ -7,7 +7,7 @@ Authors@R: c(
     c("cansav09@gmail.com","csavonen@fredhutch.org"), 
     role = c("aut", "cre")), 
     person("Kate", "Isaac", ,
-    c("kisaac@fredhutch.org), 
+    c("kisaac@fredhutch.org"), 
     role = c("aut")),
     person("Howard", "Baek", , 
     c("howardbaek@fredhutch.org","howardbaek.fh@gmail.com"), 
