@@ -8,6 +8,10 @@
 
 - **Howard Baek**. Author.
 
+- **Carrie Wright**. Contributor.
+
+- **Ava Hoffman**. Contributor.
+
 ## Citation
 
 Source:
