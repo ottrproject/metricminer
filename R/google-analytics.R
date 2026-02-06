@@ -1,5 +1,8 @@
 # Extracting data from Google Analytics
 
+# Declare global variables to avoid R CMD check NOTEs
+utils::globalVariables(c("dimensionValues", "metricValues", "page", "website"))
+
 #' Handler for API requests from Google Analytics
 #' @description This is a function that handles requests from Google Analytics.
 #'  The scope it uses is the `See and download your Google Analytics data` If you don't this check this box on the OAuth screen this won't work.

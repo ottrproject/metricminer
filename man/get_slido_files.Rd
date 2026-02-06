@@ -26,7 +26,7 @@ A list of the slido files and their content in a Googledrive location.
 \description{
 This is a function to get slido response output files.
 The slido files must be saved as googlesheets and cannot be xlsx.
-The scope it uses is to `view and manage your Drive files' the `See, edit, create, and delete all your Google Sheets spreadsheets.`
+Authentication for this function is handled by the `googledrive` package.
 However, the user will need to authorize their google account twice (once for googledrive and once for googlesheets).
 If you don't check these boxes on the OAuth screens, this function won't work.
 }
