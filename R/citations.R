@@ -64,7 +64,7 @@ parse_journal_year <- function(response){
 
 parse_links <- function(response){
   
-  links <- rvest::read_html(paper_cite_link) %>%
+  links <- rvest::read_html(response) %>%
     rvest::html_nodes('h3') %>%
     rvest::html_nodes("a") %>%
     rvest::html_attr("href")
