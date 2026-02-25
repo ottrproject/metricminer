@@ -582,8 +582,9 @@ clean_repo_metrics <- function(repo_name, repo_metric_list, split_robot) {
 
     if(split_robot) {
       contributors <- contributors %>%
-        mutate(corrected_contributor_type = if_else(str_detect(contributor, "-robot|actions-") ~ "Bot",
-                                                      contributor_type))
+        mutate(corrected_contributor_type = if_else(str_detect(contributor, "-robot|actions-"),
+                                                    "Bot",
+                                                    contributor_type))
       to_store <- contributors %>%
         group_by(corrected_contributor_type) %>%
         summarize(num_contributors = n(),
