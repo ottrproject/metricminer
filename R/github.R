@@ -588,7 +588,7 @@ clean_repo_metrics <- function(repo_name, repo_metric_list, split_robot) {
       to_store <- contributors %>%
         group_by(corrected_contributor_type) %>%
         summarize(num_contributors = n(),
-                  total_contributions = sum(contributions)
+                  total_contributions = sum(num_contributions)
                  ) %>%
         as.list()
 
