@@ -582,7 +582,7 @@ clean_repo_metrics <- function(repo_name, repo_metric_list, split_robot) {
 
     if(split_robot) {
       contributors <- contributors %>%
-        mutate(corrected_contributor_type = if_else(str_detect(contributor, "-robot|actions-"),
+        mutate(corrected_contributor_type = if_else(grepl("-robot|actions-", contributor),
                                                     "Bot",
                                                     contributor_type))
       to_store <- contributors %>%
