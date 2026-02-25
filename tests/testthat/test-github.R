@@ -28,7 +28,7 @@ if (Sys.getenv("METRICMINER_GITHUB_PAT") != "") {
 
     expect_named(metrics, c(
       'num_repo_activities', 'num_stars', 'num_forks', 'num_contributors',
-      'total_contributors', 'health_percentage'
+      'total_contributions', 'health_percentage'
     ))
 
     time_course_metrics <- get_github_repo_timecourse(repo = "ottrproject/metricminer")
@@ -39,7 +39,7 @@ if (Sys.getenv("METRICMINER_GITHUB_PAT") != "") {
 
     expect_named(some_repos_metrics, c(
       'repo_name', 'num_repo_activities', 'num_stars', 'num_forks', 'num_contributors',
-      'total_contributors', 'health_percentage'
+      'total_contributions', 'health_percentage'
     ))
   })
 } else {
