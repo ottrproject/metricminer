@@ -566,7 +566,7 @@ clean_repo_metrics <- function(repo_name, repo_metric_list) {
       lapply(repo_metric_list$contributors, function(contributor) {
         data.frame(
           contributor = contributor$login,
-          num_contributors = contributor$contributions
+          num_contributions = contributor$contributions
         )
       }) %>%
       dplyr::bind_rows() %>%
@@ -574,11 +574,11 @@ clean_repo_metrics <- function(repo_name, repo_metric_list) {
 
     cleaned_metrics$num_contributors <-
       length(unique(contributors$contributor))
-    cleaned_metrics$total_contributors <-
-      sum(contributors$num_contributors)
+    cleaned_metrics$total_contributions <-
+      sum(contributors$num_contributions)
   } else {
     cleaned_metrics$num_contributors <- NA
-    cleaned_metrics$total_contributors <- NA
+    cleaned_metrics$total_contributions <- NA
   }
 
   if (is.list(repo_metric_list$forks)) {
@@ -605,7 +605,7 @@ clean_repo_metrics <- function(repo_name, repo_metric_list) {
 
   clean_stats_names <- list(
     repo_activity = "num_repo_activities",
-    contributors = c("num_contributors","total_contributors"),
+    contributors = c("num_contributors","total_contributions"),
     forks = "num_forks",
     stars = "num_stars",
     community = "health_percentage")
