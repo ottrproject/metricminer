@@ -644,7 +644,21 @@ clean_repo_metrics <- function(repo_name, repo_metric_list, split_robot) {
   metrics <- data.frame(
     cleaned_metrics[clean_stats_names]
   )
-  rownames(metrics) <- repo_name
+if(!split_robot){
+    metrics <- data.frame(
+      cleaned_metrics[clean_stats_names])
+  } else {
+    metrics <- cbind(
+      data.frame(cleaned_metrics[clean_stats_names][grepl("contrib", clean_stats_names)]),
+      data.frame(cleaned_metrics[clean_stats_names][!grepl("contrib", clean_stats_names)])
+    )
+  }
+    
+  metrics$repo_name <- repo_name
+  
+  metrics <- metrics %>% relocate(repo_name)
+  
+  return(metrics)
 
   return(metrics)
 }
