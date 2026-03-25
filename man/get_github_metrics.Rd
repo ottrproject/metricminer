@@ -10,7 +10,8 @@ get_github_metrics(
   count = 1e+05,
   data_format = "dataframe",
   github_stats = "all",
-  time_course = FALSE
+  time_course = FALSE,
+  split_robot = TRUE
 )
 }
 \arguments{
@@ -39,6 +40,8 @@ By default "all" will be collected.}
 
 \item{time_course}{Should the time course data be collected or only the
 summary metrics?}
+
+\item{split_robot}{Boolean -- should we split out contributions from robots from users default is TRUE}
 }
 \value{
 Repository summary or time course metrics for a particular GitHub

@@ -4,13 +4,15 @@
 \alias{clean_repo_metrics}
 \title{Summarizing metrics from GitHub}
 \usage{
-clean_repo_metrics(repo_name, repo_metric_list)
+clean_repo_metrics(repo_name, repo_metric_list, split_robot)
 }
 \arguments{
 \item{repo_name}{The repository name.
 So for `https://github.com/ottrproject/metricminer`, it would be `metricminer`}
 
 \item{repo_metric_list}{a list containing the metrics}
+
+\item{split_robot}{Boolean -- should we split out contributions from robots and users}
 }
 \value{
 Metrics for a repository on GitHub
