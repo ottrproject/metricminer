@@ -46,14 +46,14 @@ The package has been designed to support several common use cases:
 1. **Educational Analytics**: Tracking engagement across course materials hosted on various platforms
 2. **Research Impact**: Monitoring repository activity and documentation usage
 3. **Event Management**: Analyzing registration and attendance patterns through Calendly integration
-4. **Website Performance**: Collecting and analyzing Google Analytics metrics
-5. **Community Engagement**: Measuring interaction through YouTube statistics and Google Forms responses
+4. **Website Engagement**: Collecting and analyzing Google Analytics metrics
+5. **Community Interaction**: Measuring interaction through YouTube statistics and Google Forms responses
 
 # Implementation and Features
 
 The package implements several key features that facilitate metrics collection:
 
-1. **Metric Standardization**: Large and unweildy json files are generally returned from most REST APIs. However this can be intimidating for many users to wrangle into a format that is easier to report or make data visualizations. All metrics returned from  `metricminer` are by default returned in tidy data format [@wickham_tidy_2014] , making it immediately usable with popular R packages like `dplyr` and `ggplot2`. For cases where the default transformation doesn't meet specific needs, the package provides an argument that will return instead the raw API responses. Ongoing community efforts to understand what metrics should be standard in reports can be facilitated as a part of `metricminer`.
+1. **Metric Standardization**: Large and unweildy json files are generally returned from most REST APIs. However this can be intimidating for many users to wrangle into a format that is easier to report or suitable for making data visualizations. All metrics returned from  `metricminer` are by default returned in tidy data format [@wickham_tidy_2014] , making it immediately usable with popular R packages like `dplyr` and `ggplot2`. For cases where the default transformation doesn't meet specific needs, the package provides an argument that will return instead the raw API responses. Ongoing community efforts to understand what metrics should be standard in reports can be facilitated as a part of `metricminer`.
 
 2. **Unified Authentication**: Through the `authorize()` function, users can authenticate with multiple services using a consistent interface. The package supports both interactive and non-interactive authentication methods, making it suitable for both manual use and automated workflows.
 
@@ -82,14 +82,14 @@ You chose to cache your credentials, if you change your mind, run metricminer::d
 Be careful not to push the cache files to GitHub or share it anywhere.
 ```
 
-For authorization, the proper pages will be open and instructions given for the user to provide their credentials.
+For authorization, the proper pages will be opened and instructions given for the user to provide their credentials.
 
 ```
 On the opened page, scroll down and click 'Generate Token'.
 ```
 
 The authorization process can be done for GitHub, Google, or Calendly.
-After authorization then you can run individual metric mining functions like:
+After authorization, then you can run individual metric mining functions like:
 
 ```
 metrics <- get_github_repo_timecourse(
