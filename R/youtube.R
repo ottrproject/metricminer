@@ -85,8 +85,8 @@ get_youtube_videos_list <- function(channel_id, token = NULL, dataformat = "data
       part = "snippet",
       channelId = channel_id,
       type = 'video',
-      maxResults = 50
-    ) else {
+      maxResults = 50 )
+    } else {
       stop("No channel_id was given")
     }
 
