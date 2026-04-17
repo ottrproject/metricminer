@@ -105,7 +105,7 @@ This will return a data frame stored in `metrics` that will look something like 
 |---|---|---|---|---|---|
 |fhdsl/metricminer-dashboard|2024-04-29|1|2|1|1|
 |fhdsl/metricminer-dashboard|2024-04-30|1|1|5|1|
-|fhdsl/metricminer-dashboard|2024-05-01|1|1|1|NA|
+|fhdsl/metricminer-dashboard|2024-05-01|1|1|1|1|
 |fhdsl/metricminer-dashboard|2024-05-05|16|9|3|1|
 
 
