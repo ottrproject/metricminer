@@ -156,9 +156,13 @@ Note that currently the form questions are not directly provided as headers in t
 If you have used Slido for interactive slide sessions and collected that info and exported it to your googledrive you can use `metricminer` to collect that data as well.
 
 ```
-drive_id <- "https://drive.google.com/drive/folders/0AJb5Zemj0AAkUk9PVA"
-slido_data <- get_slido_files(drive_id)
+shared_drive_name <- "Name" #not an ID
+slido_data <- get_slido_files(shared_drive_name)
 ```
+
+Note that you may be prompted and have to authenticate to search/access the shared drive, rather than `metricminer` completely handling the authentication as it does for most metric integrations.
+
+Future development of `metricminer` will include a version of this function which can accept a regular expression with the `tags_to_find` parameter outside of tags associated with slido data. By default this function currently searches for files beginning with "Polls-per" or "JoinedParticipants-" (both strings associated with slido exported data) but can work with a number of slido exported data files. In the future, data files matching specific patterns beyond slido exported data could be searched for and fetched.
 
 ### YouTube
 
