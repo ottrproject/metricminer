@@ -159,8 +159,21 @@ If you have used Slido for interactive slide sessions and collected that
 info and exported it to your googledrive you can use `metricminer` to
 collect that data as well.
 
-    drive_id <- "https://drive.google.com/drive/folders/0AJb5Zemj0AAkUk9PVA"
-    slido_data <- get_slido_files(drive_id)
+    shared_drive_name <- "Name" #not an ID
+    slido_data <- get_slido_files(shared_drive_name)
+
+Note that you may be prompted and have to authenticate to search/access
+the shared drive, rather than `metricminer` completely handling the
+authentication as it does for most metric integrations.
+
+Future development of `metricminer` will include a version of this
+function which can accept a regular expression with the `tags_to_find`
+parameter outside of tags associated with slido data. By default this
+function currently searches for files beginning with “Polls-per” or
+“JoinedParticipants-” (both strings associated with slido exported data)
+but can work with a number of slido exported data files. In the future,
+data files matching specific patterns beyond slido exported data could
+be searched for and fetched.
 
 #### YouTube
 
@@ -371,9 +384,9 @@ extract and authorize these secrets in the environment.
 
 ``` r
 sessionInfo()
-#> R version 4.5.2 (2025-10-31)
+#> R version 4.5.3 (2026-03-11)
 #> Platform: x86_64-pc-linux-gnu
-#> Running under: Ubuntu 24.04.3 LTS
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
 #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -393,10 +406,10 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] digest_0.6.39     desc_1.4.3        R6_2.6.1          fastmap_1.2.0    
-#>  [5] xfun_0.56         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
-#>  [9] rmarkdown_2.30    lifecycle_1.0.5   cli_3.6.5         sass_0.4.10      
-#> [13] pkgdown_2.2.0     textshaping_1.0.4 jquerylib_0.1.4   systemfonts_1.3.1
-#> [17] compiler_4.5.2    tools_4.5.2       ragg_1.5.0        evaluate_1.0.5   
-#> [21] bslib_0.10.0      yaml_2.3.12       jsonlite_2.0.0    rlang_1.1.7      
-#> [25] fs_1.6.6
+#>  [5] xfun_0.57         cachem_1.1.0      knitr_1.51        htmltools_0.5.9  
+#>  [9] rmarkdown_2.31    lifecycle_1.0.5   cli_3.6.6         sass_0.4.10      
+#> [13] pkgdown_2.2.0     textshaping_1.0.5 jquerylib_0.1.4   systemfonts_1.3.2
+#> [17] compiler_4.5.3    tools_4.5.3       ragg_1.5.2        evaluate_1.0.5   
+#> [21] bslib_0.10.0      yaml_2.3.12       jsonlite_2.0.0    rlang_1.2.0      
+#> [25] fs_2.1.0
 ```

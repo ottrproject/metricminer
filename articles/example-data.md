@@ -726,9 +726,9 @@ str(youtube_video_stats)
 
 ``` r
 sessionInfo()
-#> R version 4.5.2 (2025-10-31)
+#> R version 4.5.3 (2026-03-11)
 #> Platform: x86_64-pc-linux-gnu
-#> Running under: Ubuntu 24.04.3 LTS
+#> Running under: Ubuntu 24.04.4 LTS
 #> 
 #> Matrix products: default
 #> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -750,21 +750,21 @@ sessionInfo()
 #> [1] metricminer_1.0.1
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] jsonlite_2.0.0      dplyr_1.2.0         compiler_4.5.2     
+#>  [1] jsonlite_2.0.0      dplyr_1.2.1         compiler_4.5.3     
 #>  [4] tidyselect_1.2.1    stringr_1.6.0       assertthat_0.2.1   
 #>  [7] snakecase_0.11.1    tidyr_1.3.2         jquerylib_0.1.4    
-#> [10] systemfonts_1.3.1   textshaping_1.0.4   yaml_2.3.12        
+#> [10] systemfonts_1.3.2   textshaping_1.0.5   yaml_2.3.12        
 #> [13] fastmap_1.2.0       R6_2.6.1            generics_0.1.4     
 #> [16] curl_7.0.0          knitr_1.51          tibble_3.3.1       
 #> [19] janitor_2.2.1       desc_1.4.3          lubridate_1.9.5    
-#> [22] bslib_0.10.0        pillar_1.11.1       rlang_1.1.7        
-#> [25] stringi_1.8.7       cachem_1.1.0        xfun_0.56          
-#> [28] fs_1.6.6            sass_0.4.10         timechange_0.4.0   
-#> [31] cli_3.6.5           pkgdown_2.2.0       magrittr_2.0.4     
+#> [22] bslib_0.10.0        pillar_1.11.1       rlang_1.2.0        
+#> [25] stringi_1.8.7       cachem_1.1.0        xfun_0.57          
+#> [28] fs_2.1.0            sass_0.4.10         timechange_0.4.0   
+#> [31] cli_3.6.6           pkgdown_2.2.0       magrittr_2.0.5     
 #> [34] digest_0.6.39       gh_1.5.0            googlesheets4_1.1.2
-#> [37] lifecycle_1.0.5     vctrs_0.7.1         evaluate_1.0.5     
-#> [40] gargle_1.6.1        glue_1.8.0          cellranger_1.1.0   
-#> [43] ragg_1.5.0          googledrive_2.1.2   httr_1.4.7         
-#> [46] rmarkdown_2.30      purrr_1.2.1         tools_4.5.2        
+#> [37] lifecycle_1.0.5     vctrs_0.7.3         evaluate_1.0.5     
+#> [40] gargle_1.6.1        glue_1.8.1          cellranger_1.1.0   
+#> [43] ragg_1.5.2          googledrive_2.1.2   httr_1.4.8         
+#> [46] rmarkdown_2.31      purrr_1.2.2         tools_4.5.3        
 #> [49] pkgconfig_2.0.3     htmltools_0.5.9
 ```
