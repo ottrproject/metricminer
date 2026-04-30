@@ -23,7 +23,7 @@ authors:
 affiliations:
  - name: Fred Hutchinson Cancer Center, Seattle, WA, United States
    index: 1
- - name: Yale School of Public Health
+ - name: Integral Consulting, Boulder, CO, United States
    index: 2
 date: 12 March 2025
 bibliography: paper.bib
