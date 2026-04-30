@@ -14,7 +14,7 @@ authors:
     affiliation: 1
   - name: Kate Isaac
     affiliation: 1
-  - name: Howard Baek
+  - name: Howard Baik
     affiliation: 2
   - name: Carrie Wright
     affiliation: 1
