@@ -47,7 +47,7 @@ The package has been designed to support several common use cases:
 
 1. **Educational Analytics**: Tracking engagement across course materials hosted on various platforms
 2. **Research Impact**: Monitoring repository activity and documentation usage
-3. **Event Management**: Analyzing registration and attendance patterns through Calendly integration
+3. **Event Management**: Analyzing registration and attendance patterns through Google Sheet integration
 4. **Website Engagement**: Collecting and analyzing Google Analytics metrics
 5. **Community Interaction**: Measuring interaction through YouTube statistics and Google Forms responses
 
