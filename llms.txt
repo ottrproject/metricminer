@@ -73,6 +73,7 @@ If you want the development version (not advised) you can install using
 the `remotes` package to install from GitHub.
 
 ``` r
+
 if (!("remotes" %in% installed.packages())) {
   install.packages("remotes")
 }
@@ -96,6 +97,7 @@ scopes you feel comfortable sharing (you generally just need read
 permissions for metricminer to be able to collect data).
 
 ``` r
+
 authorize()
 ```
 

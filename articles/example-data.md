@@ -3,6 +3,7 @@
 ## Example metricminer data
 
 ``` r
+
 library("metricminer")
 ```
 
@@ -17,6 +18,7 @@ here](https://developer.calendly.com/api-docs).
 type of data.
 
 ``` r
+
 get_example_data("calendly_user")
 class(calendly_user)
 #> [1] "list"
@@ -42,6 +44,7 @@ str(calendly_user)
 this type of data.
 
 ``` r
+
 get_example_data("calendly_events")
 class(calendly_events)
 #> [1] "data.frame"
@@ -84,6 +87,7 @@ str(calendly_events)
 of data.
 
 ``` r
+
 get_example_data("gh_user")
 class(gh_user)
 #> [1] "list"
@@ -129,6 +133,7 @@ str(gh_user)
 this type of data.
 
 ``` r
+
 get_example_data("gh_repo_list")
 class(gh_repo_list)
 #> [1] "data.frame"
@@ -148,6 +153,7 @@ str(gh_repo_list)
 returns this kind of data.
 
 ``` r
+
 get_example_data("gh_repo_summary_metrics")
 class(gh_repo_summary_metrics)
 #> [1] "data.frame"
@@ -165,6 +171,7 @@ str(gh_repo_summary_metrics)
 returns this kind of data.
 
 ``` r
+
 get_example_data("gh_repo_timecourse_metrics")
 class(gh_repo_timecourse_metrics)
 #> [1] "tbl_df"     "tbl"        "data.frame"
@@ -183,6 +190,7 @@ str(gh_repo_timecourse_metrics)
 returns this kind of data.
 
 ``` r
+
 get_example_data("gh_repos_metrics")
 class(gh_repos_metrics)
 #> [1] "data.frame"
@@ -209,6 +217,7 @@ here](https://developers.google.com/analytics/devguides/reporting/data/v1).
 data.
 
 ``` r
+
 get_example_data("ga_user")
 class(ga_user)
 #> [1] "data.frame"
@@ -227,6 +236,7 @@ str(ga_user)
 kind of data.
 
 ``` r
+
 get_example_data("ga_properties")
 class(ga_properties)
 #> [1] "data.frame"
@@ -251,6 +261,7 @@ str(ga_properties)
 of data.
 
 ``` r
+
 get_example_data("ga_property_metadata")
 class(ga_property_metadata)
 #> [1] "list"
@@ -467,6 +478,7 @@ str(ga_property_metadata)
 `stats_type = "metrics"` returns this kind of data.
 
 ``` r
+
 get_example_data("ga_metrics")
 class(ga_metrics)
 #> [1] "data.frame"
@@ -490,6 +502,7 @@ str(ga_metrics)
 `stats_type = "dimensions"` returns this kind of data.
 
 ``` r
+
 get_example_data("ga_dimensions")
 class(ga_dimensions)
 #> [1] "data.frame"
@@ -508,6 +521,7 @@ str(ga_dimensions)
 `stats_type = "link_clicks"` returns this kind of data.
 
 ``` r
+
 get_example_data("ga_link_clicks")
 class(ga_link_clicks)
 #> [1] "data.frame"
@@ -521,6 +535,7 @@ str(ga_link_clicks)
 `get_all_ga_metrics()` returns this kind of data.
 
 ``` r
+
 get_example_data("ga_all_metrics")
 class(ga_all_metrics )
 #> [1] "list"
@@ -556,6 +571,7 @@ here](https://developers.google.com/forms/api/reference/rest).
 of data.
 
 ``` r
+
 get_example_data("gform_info")
 class(gform_info)
 #> [1] "list"
@@ -580,6 +596,7 @@ str(gform_info)
 this kind of data.
 
 ``` r
+
 get_example_data("gforms_multiple")
 class(gforms_multiple)
 #> [1] "list"
@@ -619,6 +636,7 @@ str(gforms_multiple)
 of data.
 
 ``` r
+
 get_example_data("slido_data")
 class(slido_data)
 #> [1] "list"
@@ -693,6 +711,7 @@ here](https://developers.google.com/youtube/v3).
 returns this kind of data.
 
 ``` r
+
 get_example_data("youtube_channel_stats")
 class(youtube_channel_stats)
 #> [1] "data.frame"
@@ -710,6 +729,7 @@ str(youtube_channel_stats)
 returns this kind of data.
 
 ``` r
+
 get_example_data("youtube_video_stats")
 class(youtube_video_stats)
 #> [1] "data.frame"
@@ -725,8 +745,9 @@ str(youtube_video_stats)
 #### Session Info
 
 ``` r
+
 sessionInfo()
-#> R version 4.5.3 (2026-03-11)
+#> R version 4.6.0 (2026-04-24)
 #> Platform: x86_64-pc-linux-gnu
 #> Running under: Ubuntu 24.04.4 LTS
 #> 
@@ -750,12 +771,12 @@ sessionInfo()
 #> [1] metricminer_1.0.1
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] jsonlite_2.0.0      dplyr_1.2.1         compiler_4.5.3     
+#>  [1] jsonlite_2.0.0      dplyr_1.2.1         compiler_4.6.0     
 #>  [4] tidyselect_1.2.1    stringr_1.6.0       assertthat_0.2.1   
 #>  [7] snakecase_0.11.1    tidyr_1.3.2         jquerylib_0.1.4    
 #> [10] systemfonts_1.3.2   textshaping_1.0.5   yaml_2.3.12        
 #> [13] fastmap_1.2.0       R6_2.6.1            generics_0.1.4     
-#> [16] curl_7.0.0          knitr_1.51          tibble_3.3.1       
+#> [16] curl_7.1.0          knitr_1.51          tibble_3.3.1       
 #> [19] janitor_2.2.1       desc_1.4.3          lubridate_1.9.5    
 #> [22] bslib_0.10.0        pillar_1.11.1       rlang_1.2.0        
 #> [25] stringi_1.8.7       cachem_1.1.0        xfun_0.57          
@@ -765,6 +786,6 @@ sessionInfo()
 #> [37] lifecycle_1.0.5     vctrs_0.7.3         evaluate_1.0.5     
 #> [40] gargle_1.6.1        glue_1.8.1          cellranger_1.1.0   
 #> [43] ragg_1.5.2          googledrive_2.1.2   httr_1.4.8         
-#> [46] rmarkdown_2.31      purrr_1.2.2         tools_4.5.3        
+#> [46] rmarkdown_2.31      purrr_1.2.2         tools_4.6.0        
 #> [49] pkgconfig_2.0.3     htmltools_0.5.9
 ```
