@@ -30,7 +30,7 @@ get_youtube_channel_stats <- function(channel_id, token = NULL, dataformat = "da
   # Wrapping body parameters in a requests list
   if (!is.null(channel_id)) {
     # If a URL is supplied, only take the ID from it.
-    if (grepl("https:", channel_id)) channel_id <- gsub("https://drive.google.com/drive/folders/", "")
+    if (grepl("https:", channel_id)) channel_id <- gsub("https://www.youtube.com/channel/", "")
 
     query <- list(
       part = "snippet,contentDetails,statistics",
