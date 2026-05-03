@@ -6,7 +6,6 @@
 #' @param token OAuth token from Google login.
 #' @param dataformat How would you like the data returned to you? Default is a "dataframe" but if you'd like to see the original API list result, put "raw".
 #' https://www.youtube.com/channel/UCBbHCj7kUogAMFyBAzzzfUw or just the  "UCBbHCj7kUogAMFyBAzzzfUw" part
-#' @param dataformat How would you like the data returned to you? Default is a "dataframe" but if you'd like to see the original API list result, put "raw".
 #' @return A data frame of the channel stats from a Youtube channel.
 #' @importFrom httr config accept_json content
 #' @importFrom jsonlite fromJSON
@@ -57,6 +56,88 @@ get_youtube_channel_stats <- function(channel_id, token = NULL, dataformat = "da
 
   return(result_list)
 }
+
+#' Get YouTube Video IDs for a given channel
+#' @description This is a function that returns YouTube Video IDs given a YouTube channel ID. 
+#' Note this is a "costly" query of 100 units against the daily quota https://developers.google.com/youtube/v3/docs/search/list#go
+#' @param channel_ID ID of the channel that you want a list of videos from.
+#' https://www.youtube.com/channel/UCBbHCj7kUogAMFyBAzzzfUw or just the  "UCBbHCj7kUogAMFyBAzzzfUw" part
+#' @param token OAuth token from Google login. 
+#' @param dataformat How would you like the data returned to you? Default is a "dataframe" but if you'd like to see the original API list result, put "raw".
+#' Consider using "raw" if you want the text descriptions for the videos too
+#' @return a data frmae of the YouTube video IDs
+#' @importFrom httr config accept_json content
+#' @importFrom jsonlite fromJSON
+#' @importFrom assertthat assert_that is.string
+#' @export
+get_youtube_videos_list <- function(channel_id, token = NULL, dataformat = "dataframe"){
+  
+  # Get auth token
+  token <- get_token("google")
+  config <- httr::config(token = token)
+
+  # Wrapping body parameters in a requests list
+  if (!is.null(channel_id)){
+    # If a URL is supplied, only tke the ID from it.
+    if (grepl("https:", channel_id)) channel_id <- gsub("https://www.youtube.com/channel/", "", channel_id, fixed = TRUE)
+
+    query <- list(
+      part = "snippet",
+      channelId = channel_id,
+      type = 'video',
+      maxResults = 50 )
+    } else {
+      stop("No channel_id was given")
+    }
+
+  # temporary variables
+  nextPageToken <- ""
+  videoID_df <- NULL
+
+  # --------- Loop through the playlist while there is still a next page ---------
+  while (!is.null(nextPageToken)) {
+    # Get endpoint url
+    url <- "https://youtube.googleapis.com/youtube/v3/search"
+    
+    # Add the page token for page 2 onwards
+    if (nextPageToken != "") {
+      url <- paste0(url, "&pageToken=", nextPageToken)
+    }
+
+    # Get list of topics
+    result <- httr::GET(url, config = config, query = query, httr::accept_json())
+
+    if (httr::status_code(result) != 200) {
+      httr::stop_for_status(result)
+    }
+
+    # Process and return results
+    result_content <- httr::content(result, "text")
+    result_list <- jsonlite::fromJSON(result_content)
+      
+    # Determine if next page is present
+    nextPageToken <- result_list$nextPageToken
+
+    if (dataformat == "dataframe"){
+      page_df <- as.data.frame(result_list$items$id$videoID)
+      if (is.null(videoID_df)) {
+        videoID_df <- page_df
+      } else {
+        videoID_df <- bind_rows(videoID_df, page_df)
+      }
+    } else{
+      if (is.null(videoID_df)) {
+        videoID_df <- result_list
+      } else {
+        videoID_df <- bind_rows(videoID_df, result_list)
+      }
+    }
+  }
+  return(videoID_df)
+}
+      
+
+    
 
 
 #' Get Youtube video stats
