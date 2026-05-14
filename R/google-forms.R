@@ -114,7 +114,7 @@ get_google_form <- function(form_id, token = NULL, dataformat = "dataframe") {
     metadata <- get_question_metadata(form_info)
 
     if (length(result$response_info$result) > 0) {
-      answers_df <- extract_answers(result)
+      answers_df <- extract_answers(result, metadata = metadata)
     } else {
       answers_df <- "no responses yet"
     }
@@ -172,6 +172,114 @@ get_multiple_forms <- function(form_ids = NULL, token = NULL, dataformat = "data
   all_form_info
 }
 
+extract_google_form_rows <- function(df) {
+  if (is.null(df) || length(df) == 0) {
+    return(list())
+  }
+
+  if (is.data.frame(df)) {
+    return(lapply(seq_len(nrow(df)), function(i) {
+      lapply(df, function(col) {
+        if (is.list(col)) {
+          col[[i]]
+        } else {
+          col[[i]]
+        }
+      })
+    }))
+  }
+
+  if (is.list(df) && !is.null(names(df))) {
+    return(list(df))
+  }
+
+  df
+}
+
+
+extract_form_scalar <- function(x, default = NA) {
+  if (is.null(x) || length(x) == 0) {
+    return(default)
+  }
+
+  if (is.data.frame(x)) {
+    return(extract_form_scalar(x[[1]][[1]], default = default))
+  }
+
+  if (is.list(x) && length(x) == 1) {
+    return(extract_form_scalar(x[[1]], default = default))
+  }
+
+  x[[1]]
+}
+
+
+build_google_form_answer_name <- function(question_id, title) {
+  readable_title <- title
+
+  if (is.null(readable_title) || is.na(readable_title) || readable_title == "") {
+    readable_title <- question_id
+  }
+
+  readable_title <- janitor::make_clean_names(readable_title)
+  paste0(readable_title, "__", question_id, "_answers")
+}
+
+
+extract_question_metadata_rows <- function(item) {
+  item_id <- as.character(extract_form_scalar(item$itemId, NA_character_))
+  item_title <- as.character(extract_form_scalar(item$title, NA_character_))
+  metadata_rows <- list()
+
+  if (!is.null(item$questionItem) && !is.null(item$questionItem$question)) {
+    question <- item$questionItem$question
+    question_id <- as.character(extract_form_scalar(question$questionId, NA_character_))
+    paragraph <- as.logical(extract_form_scalar(question$textQuestion$paragraph, NA))
+    choice_question <- as.character(extract_form_scalar(question$choiceQuestion$type, NA_character_))
+
+    metadata_rows[[length(metadata_rows) + 1]] <- data.frame(
+      question_id = question_id,
+      item_id = item_id,
+      title = item_title,
+      paragraph = paragraph,
+      choice_question = choice_question,
+      text_question = !is.na(paragraph),
+      answer_column = build_google_form_answer_name(question_id, item_title),
+      stringsAsFactors = FALSE,
+      check.names = FALSE
+    )
+  }
+
+  if (!is.null(item$questionGroupItem) && !is.null(item$questionGroupItem$questions)) {
+    group_questions <- extract_google_form_rows(item$questionGroupItem$questions)
+
+    for (question in group_questions) {
+      question_id <- as.character(extract_form_scalar(question$questionId, NA_character_))
+      row_title <- as.character(extract_form_scalar(question$rowQuestion$title, NA_character_))
+      question_title <- item_title
+
+      if (!is.na(row_title) && row_title != "") {
+        question_title <- paste(item_title, row_title, sep = " - ")
+      }
+
+      metadata_rows[[length(metadata_rows) + 1]] <- data.frame(
+        question_id = question_id,
+        item_id = item_id,
+        title = question_title,
+        paragraph = as.logical(extract_form_scalar(question$textQuestion$paragraph, NA)),
+        choice_question = as.character(extract_form_scalar(question$choiceQuestion$type, NA_character_)),
+        text_question = !is.na(extract_form_scalar(question$textQuestion$paragraph, NA)),
+        answer_column = build_google_form_answer_name(question_id, question_title),
+        stringsAsFactors = FALSE,
+        check.names = FALSE
+      )
+    }
+  }
+
+  metadata_rows
+}
+
+
 #' Google Form handling functions
 #' @description This is a function to get metadata about a Google Form. It is
 #'  used by the `get_google_form()` function if dataformat = "dataframe".
@@ -179,76 +287,135 @@ get_multiple_forms <- function(form_ids = NULL, token = NULL, dataformat = "data
 #' @returns This returns metadata from a google form
 #' @export
 get_question_metadata <- function(form_info) {
-  metadata <- data.frame(
-    question_id = form_info$result$items$itemId,
-    title = form_info$result$items$title
-  )
+  item_rows <- extract_google_form_rows(form_info$result$items)
 
-  if (length(form_info$result$items$questionItem$question$textQuestion) > 0) {
-    metadata <- data.frame(
-      metadata,
-      paragraph = form_info$result$items$questionItem$question$textQuestion
-    )
-  }
-  if (length(form_info$result$items$questionItem$question$choiceQuestion$type) > 0) {
-    metadata <- data.frame(
-      metadata,
-      choice_question = form_info$result$items$questionItem$question$choiceQuestion$type,
-      text_question = is.na(form_info$result$items$questionItem$question$choiceQuestion$type)
-    )
+  if (length(item_rows) == 0) {
+    return(data.frame())
   }
 
-  return(metadata)
+  metadata <- lapply(item_rows, extract_question_metadata_rows)
+  metadata <- metadata[lengths(metadata) > 0]
+  metadata <- unlist(metadata, recursive = FALSE, use.names = FALSE)
+
+  if (length(metadata) == 0) {
+    return(data.frame())
+  }
+
+  metadata <- dplyr::bind_rows(metadata)
+  metadata <- metadata[!is.na(metadata$question_id), , drop = FALSE]
+  rownames(metadata) <- NULL
+
+  metadata
 }
 
 #' Google Form handling functions -- extracting answers
 #' @description This is a function to get extract answers from a Google Form. It is
 #'  used by the `get_google_form()` function if dataformat = "dataframe"
 #' @param form_info The return form_info list that is extracted in `get_google_form()`
+#' @param metadata Optional metadata returned by `get_question_metadata()`
 #' @export
 #' @returns This returns answers from a google form
-extract_answers <- function(form_info) {
-  questions <- form_info$response_info$result$responses$answers
+extract_answers <- function(form_info, metadata = NULL) {
+  responses <- extract_google_form_rows(form_info$response_info$result$responses)
 
-  if (length(questions) > 0) {
-    # Extract the bits we want
-    answers <- purrr::map(
-      questions,
-      ~ .x$textAnswers$answers
-    )
-
-    question_id <- purrr::map(
-      questions,
-      ~ .x$questionId
-    )
-
-    # Reformat the answer info
-    answers <- purrr::map_depth(answers, 2, ~ ifelse(is.null(.x),
-      data.frame(value = "NA"),
-      .x
-    ))
-
-    answers <- purrr::map_depth(answers, -1, ~ ifelse(length(.x) > 1,
-      paste0(.x, collapse = "|"),
-      .x
-    ))
-    answers <- lapply(answers, purrr::map, -1)
-
-    # Turn into data frames
-    answers_df <- lapply(answers, paste0) %>% dplyr::bind_cols()
-
-    colnames(answers_df) <- paste0(colnames(answers_df), "_answers")
-
-    # Put it all in a data.frame we will keep
-    info_df <- data.frame(
-      response_id = rep(form_info$response_info$result$responses$responseId, length(questions)),
-      answers_df
-    )
-  } else {
-    info_df <- data.frame(value = "no responses yet")
+  if (length(responses) == 0) {
+    return(data.frame(value = "no responses yet"))
   }
 
-  return(info_df)
+  if (is.null(metadata)) {
+    metadata <- get_question_metadata(form_info$form_metadata)
+  }
+
+  metadata_lookup <- stats::setNames(metadata$answer_column, metadata$question_id)
+
+  collapse_text_answers <- function(answer) {
+    answer_values <- answer$textAnswers$answers
+
+    if (is.null(answer_values) || length(answer_values) == 0) {
+      return(NA_character_)
+    }
+
+    if (is.data.frame(answer_values) && "value" %in% names(answer_values)) {
+      values <- answer_values$value
+    } else {
+      values <- vapply(answer_values, function(single_answer) {
+        as.character(extract_form_scalar(single_answer$value, NA_character_))
+      }, character(1))
+    }
+
+    paste(values, collapse = "|")
+  }
+
+  collapse_file_upload_answers <- function(answer) {
+    uploaded_files <- answer$fileUploadAnswers$answers
+
+    if (is.null(uploaded_files) || length(uploaded_files) == 0) {
+      return(NA_character_)
+    }
+
+    if (is.data.frame(uploaded_files)) {
+      file_names <- uploaded_files$fileName
+      if (is.null(file_names)) {
+        file_names <- uploaded_files$fileId
+      }
+      return(paste(file_names, collapse = "|"))
+    }
+
+    file_names <- vapply(uploaded_files, function(single_file) {
+      file_name <- extract_form_scalar(single_file$fileName, NA_character_)
+      if (is.na(file_name)) {
+        file_name <- extract_form_scalar(single_file$fileId, NA_character_)
+      }
+      as.character(file_name)
+    }, character(1))
+
+    paste(file_names, collapse = "|")
+  }
+
+  extract_single_answer <- function(answer) {
+    if (!is.null(answer$textAnswers)) {
+      return(collapse_text_answers(answer))
+    }
+
+    if (!is.null(answer$fileUploadAnswers)) {
+      return(collapse_file_upload_answers(answer))
+    }
+
+    NA_character_
+  }
+
+  response_rows <- lapply(responses, function(response) {
+    response_row <- list(
+      response_id = as.character(extract_form_scalar(response$responseId, NA_character_))
+    )
+
+    answers <- response$answers
+
+    if (!is.null(answers) && length(answers) > 0) {
+      if (is.null(names(answers)) && !is.null(answers$questionId)) {
+        answers <- list(answers)
+        names(answers) <- as.character(extract_form_scalar(answers[[1]]$questionId, NA_character_))
+      }
+
+      for (answer in answers) {
+        question_id <- as.character(extract_form_scalar(answer$questionId, NA_character_))
+        answer_column <- metadata_lookup[[question_id]]
+
+        if (is.null(answer_column) || is.na(answer_column)) {
+          answer_column <- build_google_form_answer_name(question_id, question_id)
+        }
+
+        response_row[[answer_column]] <- extract_single_answer(answer)
+      }
+    }
+
+    response_row
+  })
+
+  info_df <- dplyr::bind_rows(response_rows)
+  info_df <- as.data.frame(info_df, stringsAsFactors = FALSE, check.names = FALSE)
+
+  info_df
 }
 
 
@@ -274,10 +441,10 @@ next_google <- function(page_result) {
   )
 
   result <- request_google_forms(
-    token = token,
-    url = url,
+    token = page_result$request_info$token,
+    url = page_result$request_info$url,
     body_params = body_params,
-    query_params = query_params,
+    query_params = page_result$request_info$query_params,
     return_request = TRUE
   )
 

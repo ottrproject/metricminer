@@ -4,10 +4,12 @@
 \alias{extract_answers}
 \title{Google Form handling functions -- extracting answers}
 \usage{
-extract_answers(form_info)
+extract_answers(form_info, metadata = NULL)
 }
 \arguments{
 \item{form_info}{The return form_info list that is extracted in `get_google_form()`}
+
+\item{metadata}{Optional metadata returned by `get_question_metadata()`}
 }
 \value{
 This returns answers from a google form

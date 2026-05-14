@@ -24,7 +24,8 @@ write_to_gsheet(
 
 \item{overwrite}{TRUE/FALSE overwrite if there is data at the destination}
 
-\item{append_rows}{TRUE/FALSE should the data be appended to the data?}
+\item{append_rows}{TRUE/FALSE should the data be appended to the data? Appending
+adds rows as-is and does not deduplicate existing data.}
 
 \item{sheet}{Index or name of the worksheet you want to write to. Forwarded to googlesheets4::write_sheet or googlesheets4::append_sheet to indicate what sheet it should be written to.}
 

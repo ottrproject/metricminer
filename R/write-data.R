@@ -6,7 +6,8 @@
 #' @param token OAuth token from Google login.
 #' @param gsheet Optionally a googlesheet to write to
 #' @param overwrite TRUE/FALSE overwrite if there is data at the destination
-#' @param append_rows TRUE/FALSE should the data be appended to the data?
+#' @param append_rows TRUE/FALSE should the data be appended to the data? Appending
+#' adds rows as-is and does not deduplicate existing data.
 #' @param sheet Index or name of the worksheet you want to write to. Forwarded to googlesheets4::write_sheet or googlesheets4::append_sheet to indicate what sheet it should be written to.
 #' @param new_sheet default is FALSE. But if it is anything else will be used as the name for a new worksheet that will be made and written to.
 #' @param ... these parameters are sent to googlesheets4::write_sheet.
@@ -86,7 +87,13 @@ write_to_gsheet <- function(input, token = NULL, gsheet = NULL, overwrite = FALS
   if (append_rows == FALSE) gsheet_output <- googlesheets4::write_sheet(data = input, ss = gsheet, sheet = sheet, ...)
 
   # We've been told to append
-  if (append_rows == TRUE) gsheet_output <- googlesheets4::sheet_append(data = input, ss = gsheet, sheet = sheet, ...)
+  if (append_rows == TRUE) {
+    warning(
+      "append_rows = TRUE appends rows as-is and does not deduplicate existing data.",
+      call. = FALSE
+    )
+    gsheet_output <- googlesheets4::sheet_append(data = input, ss = gsheet, sheet = sheet, ...)
+  }
 
   return(gsheet_output)
 }
