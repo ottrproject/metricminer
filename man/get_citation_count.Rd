@@ -4,10 +4,12 @@
 \alias{get_citation_count}
 \title{Get a list of papers that cite your paper}
 \usage{
-get_citation_count(paper_cite_link)
+get_citation_count(paper_cite_link, sleeptime = 30)
 }
 \arguments{
 \item{paper_cite_link}{This is not a google citation page. 1. Go to: https://scholar.google.com/scholar 2. Search for the paper we are looking for the citation count. 3. Then click the Cited by ___ button below the title of the paper 4. Copy and paste this url and put it in this get_citation_count() function}
+
+\item{sleeptime}{a time in seconds to use sys.sleep between http requests to try to avoid Google Scholar rate limit; default is 30}
 }
 \value{
 A list of the example datasets available in this package
