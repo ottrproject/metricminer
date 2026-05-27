@@ -179,13 +179,13 @@ extract_google_form_rows <- function(df) {
 
   if (is.data.frame(df)) {
     return(lapply(seq_len(nrow(df)), function(i) {
-      lapply(df, function(col) {
-        if (is.list(col)) {
-          col[[i]]
+        if (is.list(col(df))) {
+            message("evalued the if")
+            df[col(df)[[i,i]],]
         } else {
-          col[[i]]
+            message("went to the else")
+            df[col(df)[[i,i]],]
         }
-      })
     }))
   }
 
