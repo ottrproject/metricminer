@@ -184,7 +184,7 @@ extract_google_form_rows <- function(df) {
             df[col(df)[[i,min(ncol(df), i)]],]
         } else {
             message("went to the else")
-            df[col(df)[[i,min(ncol(df), i)]],]
+            df[i,]
         }
     }))
   }
