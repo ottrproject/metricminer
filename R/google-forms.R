@@ -181,10 +181,10 @@ extract_google_form_rows <- function(df) {
     return(lapply(seq_len(nrow(df)), function(i) {
         if (is.list(col(df))) {
             message("evalued the if")
-            df[col(df)[[i,i]],]
+            df[col(df)[[i,min(ncol(df), i)]],]
         } else {
             message("went to the else")
-            df[col(df)[[i,i]],]
+            df[col(df)[[i,min(ncol(df), i)]],]
         }
     }))
   }
