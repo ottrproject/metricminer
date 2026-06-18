@@ -9,7 +9,8 @@ get_multiple_repos_metrics(
   token = NULL,
   data_format = "dataframe",
   time_course = FALSE,
-  github_stats = "all"
+  github_stats = "all",
+  split_robot = TRUE
 )
 }
 \arguments{
@@ -28,7 +29,9 @@ format to "raw".}
 summary metrics?}
 
 \item{github_stats}{Which stats would you like to collect from the GitHub
-API?
+API?}
+
+\item{split_robot}{Boolean -- should we split out contributions from robots and users. Default is TRUE
 Argument should be a vector of the names of the stats to be collected.
 This differs whether time_course is TRUE/FALSE.
 If time_course = FALSE should be a vector that can include: "repo_activity",

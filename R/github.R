@@ -186,6 +186,7 @@ get_user_repo_list <- function(owner,
 #' "raw".
 #' @param time_course Should the time course data be collected or only the
 #' summary metrics?
+#' @param split_robot Boolean -- should we split out contributions from robots from users default is TRUE
 #' @return Repository summary or time course metrics for a particular GitHub
 #'  repository as a dataframe
 #' @importFrom gh gh
@@ -211,7 +212,8 @@ get_github_metrics <- function(repo,
                                count = 100000,
                                data_format = "dataframe",
                                github_stats = "all",
-                               time_course = FALSE) {
+                               time_course = FALSE,
+                               split_robot = TRUE) {
 
   if (is.null(token)) {
     # Get auth token
@@ -310,7 +312,8 @@ get_github_metrics <- function(repo,
     } else {
       results <- clean_repo_metrics(
         repo_name = paste0(c(owner, repo), collapse = "/"),
-        repo_metric_list = results
+        repo_metric_list = results,
+        split_robot = split_robot
       )
     }
   }
@@ -428,6 +431,7 @@ get_github_repo_summary <- function(repo,
 #' summary metrics?
 #' @param github_stats Which stats would you like to collect from the GitHub
 #' API?
+#' @param split_robot Boolean -- should we split out contributions from robots and users. Default is TRUE
 #' Argument should be a vector of the names of the stats to be collected.
 #' This differs whether time_course is TRUE/FALSE.
 #' If time_course = FALSE should be a vector that can include: "repo_activity",
@@ -461,7 +465,8 @@ get_multiple_repos_metrics <- function(repo_names = NULL,
                                        token = NULL,
                                        data_format = "dataframe",
                                        time_course = FALSE,
-                                       github_stats = "all") {
+                                       github_stats = "all",
+                                       split_robot = TRUE) {
   if (is.null(token)) {
     # Get auth token
     token <- get_token(app_name = "github", try = TRUE)
@@ -478,7 +483,8 @@ get_multiple_repos_metrics <- function(repo_names = NULL,
       repo = repo,
       data_format = data_format,
       time_course = time_course,
-      github_stats = github_stats
+      github_stats = github_stats,
+      split_robot = split_robot
     )
   })
 
@@ -544,13 +550,14 @@ gh_repo_wrapper <- function(api_call,
 #' @param repo_name The repository name.
 #' So for `https://github.com/ottrproject/metricminer`, it would be `metricminer`
 #' @param repo_metric_list a list containing the metrics
+#' @param split_robot Boolean -- should we split out contributions from robots and users
 #' @return Metrics for a repository on GitHub
 #' @importFrom gh gh
 #' @importFrom dplyr bind_rows distinct %>%
 #' @importFrom purrr map
 #' @export
 #'
-clean_repo_metrics <- function(repo_name, repo_metric_list) {
+clean_repo_metrics <- function(repo_name, repo_metric_list, split_robot) {
 
   stats_collected <- names(repo_metric_list)
   cleaned_metrics <- list()
@@ -566,19 +573,39 @@ clean_repo_metrics <- function(repo_name, repo_metric_list) {
       lapply(repo_metric_list$contributors, function(contributor) {
         data.frame(
           contributor = contributor$login,
-          num_contributors = contributor$contributions
+          contributor_type = contributor$type,
+          num_contributions = contributor$contributions
         )
       }) %>%
       dplyr::bind_rows() %>%
       dplyr::distinct()
 
-    cleaned_metrics$num_contributors <-
-      length(unique(contributors$contributor))
-    cleaned_metrics$total_contributors <-
-      sum(contributors$num_contributors)
+    if(split_robot) {
+      contributors <- contributors %>%
+        mutate(corrected_contributor_type = if_else(grepl("-robot|actions-", contributor),
+                                                    "Bot",
+                                                    contributor_type))
+      to_store <- contributors %>%
+        group_by(corrected_contributor_type) %>%
+        summarize(num_contributors = n(),
+                  total_contributions = sum(num_contributions)
+                 ) %>%
+        as.list()
+
+      cleaned_metrics$num_contributors <- to_store$num_contributors
+      cleaned_metrics$total_contributions <- to_store$total_contributions
+      cleaned_metrics$contributor_type <- to_store$corrected_contributor_type
+    } else{ #if split_robot is false
+      cleaned_metrics$num_contributors <-
+        length(unique(contributors$contributor))
+      cleaned_metrics$total_contributions <-
+        sum(contributors$num_contributions)
+      cleaned_metrics$contributor_type <- NA
+      }
   } else {
     cleaned_metrics$num_contributors <- NA
-    cleaned_metrics$total_contributors <- NA
+    cleaned_metrics$total_contributions <- NA
+    cleaned_metrics$contributor_type <- NA
   }
 
   if (is.list(repo_metric_list$forks)) {
@@ -605,7 +632,7 @@ clean_repo_metrics <- function(repo_name, repo_metric_list) {
 
   clean_stats_names <- list(
     repo_activity = "num_repo_activities",
-    contributors = c("num_contributors","total_contributors"),
+    contributors = c("num_contributors","total_contributions", "contributor_type"),
     forks = "num_forks",
     stars = "num_stars",
     community = "health_percentage")
@@ -617,7 +644,21 @@ clean_repo_metrics <- function(repo_name, repo_metric_list) {
   metrics <- data.frame(
     cleaned_metrics[clean_stats_names]
   )
-  rownames(metrics) <- repo_name
+if(!split_robot){
+    metrics <- data.frame(
+      cleaned_metrics[clean_stats_names])
+  } else {
+    metrics <- cbind(
+      data.frame(cleaned_metrics[clean_stats_names][grepl("contrib", clean_stats_names)]),
+      data.frame(cleaned_metrics[clean_stats_names][!grepl("contrib", clean_stats_names)])
+    )
+  }
+    
+  metrics$repo_name <- repo_name
+  
+  metrics <- metrics %>% relocate(repo_name)
+  
+  return(metrics)
 
   return(metrics)
 }
