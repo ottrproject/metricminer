@@ -179,13 +179,22 @@ extract_google_form_rows <- function(df) {
 
   if (is.data.frame(df)) {
     return(lapply(seq_len(nrow(df)), function(i) {
-        if (is.list(col(df))) {
-            message("evalued the if")
-            df[col(df)[[i,min(ncol(df), i)]],]
+      lapply(df, function(col) {
+        if (is.data.frame(col)) {
+          # A nested JSON object was parsed into a data.frame column.
+          # `col[[i]]` would index by COLUMN, not row, and error out once
+          # `i` exceeds ncol(col). Slice out row `i` instead, keeping it as
+          # a one-row data.frame so downstream code (which already knows
+          # how to walk data.frames/lists via extract_form_scalar()) works.
+          as.list(col[i, , drop = FALSE])
+        } else if (is.list(col)) {
+          # A genuine list column: each element already corresponds to a row.
+          col[[i]]
         } else {
-            message("went to the else")
-            df[i,]
+          # A plain atomic vector column.
+          col[[i]]
         }
+      })
     }))
   }
 
@@ -399,10 +408,18 @@ extract_answers <- function(form_info, metadata = NULL) {
 
       for (answer in answers) {
         question_id <- as.character(extract_form_scalar(answer$questionId, NA_character_))
-        answer_column <- metadata_lookup[[question_id]]
+
+        # `metadata_lookup` is a named atomic vector, not a list, so using
+        # `[[` with a name that isn't present throws "subscript out of
+        # bounds" instead of returning NULL. Single-bracket indexing (`[`)
+        # returns a length-1 named vector with NA when the name is missing,
+        # which lets the fallback below actually run instead of crashing.
+        answer_column <- metadata_lookup[question_id]
 
         if (is.null(answer_column) || is.na(answer_column)) {
           answer_column <- build_google_form_answer_name(question_id, question_id)
+        } else {
+          answer_column <- unname(answer_column)
         }
 
         response_row[[answer_column]] <- extract_single_answer(answer)
